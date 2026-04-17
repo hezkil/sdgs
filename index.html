@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDGs — Tujuan Pembangunan Berkelanjutan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-badge">SDGs</span>
+        <span class="logo-text">Indonesia 2030</span>
+      </div>
+      <div class="nav-links">
+        <a href="#fokus">Fokus Kami</a>
+        <a href="#semua-sdgs">17 Tujuan</a>
+        <a href="#progress">Progress</a>
+        <a href="#aksi">Bergabung</a>
+      </div>
+      <button class="nav-cta" onclick="document.getElementById('aksi').scrollIntoView({behavior:'smooth'})">Ambil Aksi</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+      <div class="hero-orb orb3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="dot dot-green"></span>
+        Agenda Global 2030 · Indonesia
+      </div>
+      <h1 class="hero-title">Membangun<br /><em>Dunia yang Lebih</em><br />Baik Bersama</h1>
+      <p class="hero-sub">17 Tujuan Pembangunan Berkelanjutan untuk mengakhiri kemiskinan, melindungi bumi, dan memastikan perdamaian serta kesejahteraan bagi semua orang.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('fokus').scrollIntoView({behavior:'smooth'})">Lihat Fokus Kami</button>
+        <button class="btn-ghost" onclick="document.getElementById('semua-sdgs').scrollIntoView({behavior:'smooth'})">17 Tujuan →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">17</span><span class="stat-label">Tujuan Global</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">169</span><span class="stat-label">Target Spesifik</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">2030</span><span class="stat-label">Tenggat Waktu</span></div>
+      </div>
+    </div>
+    <div class="hero-wheel">
+      <div class="wheel-ring">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="soft"><feGaussianBlur stdDeviation="1"/></filter>
+          </defs>
+          <!-- SDG wheel segments -->
+          <g id="sdg-wheel">
+            <path class="seg seg1" d="M210 210 L210 20 A190 190 0 0 1 320 50 Z" />
+            <path class="seg seg2" d="M210 210 L320 50 A190 190 0 0 1 395 155 Z" />
+            <path class="seg seg3" d="M210 210 L395 155 A190 190 0 0 1 400 210 Z" />
+            <path class="seg seg4" d="M210 210 L400 210 A190 190 0 0 1 395 265 Z" />
+            <path class="seg seg5" d="M210 210 L395 265 A190 190 0 0 1 370 320 Z" />
+            <path class="seg seg6" d="M210 210 L370 320 A190 190 0 0 1 320 370 Z" />
+            <path class="seg seg7" d="M210 210 L320 370 A190 190 0 0 1 265 395 Z" />
+            <path class="seg seg8" d="M210 210 L265 395 A190 190 0 0 1 210 400 Z" />
+            <path class="seg seg9" d="M210 210 L210 400 A190 190 0 0 1 155 395 Z" />
+            <path class="seg seg10" d="M210 210 L155 395 A190 190 0 0 1 100 370 Z" />
+            <path class="seg seg11" d="M210 210 L100 370 A190 190 0 0 1 50 320 Z" />
+            <path class="seg seg12" d="M210 210 L50 320 A190 190 0 0 1 25 265 Z" />
+            <path class="seg seg13" d="M210 210 L25 265 A190 190 0 0 1 20 210 Z" />
+            <path class="seg seg14" d="M210 210 L20 210 A190 190 0 0 1 25 155 Z" />
+            <path class="seg seg15" d="M210 210 L25 155 A190 190 0 0 1 50 100 Z" />
+            <path class="seg seg16" d="M210 210 L50 100 A190 190 0 0 1 100 50 Z" />
+            <path class="seg seg17" d="M210 210 L100 50 A190 190 0 0 1 210 20 Z" />
+            <circle cx="210" cy="210" r="70" fill="white" />
+            <text x="210" y="200" text-anchor="middle" class="wheel-center-num">SDGs</text>
+            <text x="210" y="222" text-anchor="middle" class="wheel-center-sub">2030</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOKUS SECTION: SDG 3 & 4 -->
+  <section class="fokus" id="fokus">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Fokus Utama Kami</span>
+        <h2>Kesehatan &amp; Pendidikan:<br />Fondasi Peradaban</h2>
+        <p>Kami berkomitmen pada SDG 3 dan SDG 4 karena keduanya membentuk landasan bagi semua tujuan pembangunan lainnya.</p>
+      </div>
+
+      <!-- SDG 3 CARD -->
+      <div class="focus-card sdg3-card" id="sdg3">
+        <div class="focus-card-left">
+          <div class="sdg-badge sdg3-badge">
+            <span class="sdg-num">3</span>
+          </div>
+          <div class="focus-info">
+            <span class="focus-tag green-tag">SDG 3</span>
+            <h3>Kehidupan Sehat &amp; Sejahtera</h3>
+            <p class="focus-desc">Memastikan kehidupan yang sehat dan meningkatkan kesejahteraan seluruh penduduk di semua usia. Akses kesehatan universal bukan lagi kemewahan — itu adalah hak setiap manusia.</p>
+            <div class="focus-targets">
+              <h4>Target Kunci:</h4>
+              <ul>
+                <li>Mengurangi angka kematian ibu hingga di bawah 70 per 100.000 kelahiran hidup</li>
+                <li>Mengakhiri kematian yang dapat dicegah pada bayi dan balita</li>
+                <li>Mencapai Universal Health Coverage (UHC) termasuk perlindungan finansial</li>
+                <li>Memperkuat pencegahan dan penanganan penyalahgunaan zat</li>
+                <li>Mengurangi kematian akibat kecelakaan lalu lintas sebesar 50%</li>
+              </ul>
+            </div>
+            <div class="focus-metrics">
+              <div class="metric-chip green-chip"><span>UHC</span>Universal Coverage</div>
+              <div class="metric-chip green-chip"><span>↓</span>Angka Kematian</div>
+              <div class="metric-chip green-chip"><span>+</span>Akses Vaksin</div>
+            </div>
+          </div>
+        </div>
+        <div class="focus-card-right">
+          <div class="focus-visual sdg3-visual">
+            <div class="vis-icon">🏥</div>
+            <div class="vis-stat-grid">
+              <div class="vis-stat">
+                <div class="vis-num green-text">73%</div>
+                <div class="vis-label">Cakupan JKN Indonesia</div>
+              </div>
+              <div class="vis-stat">
+                <div class="vis-num green-text">189</div>
+                <div class="vis-label">Kematian Ibu per 100rb (2022)</div>
+              </div>
+              <div class="vis-stat">
+                <div class="vis-num green-text">93%</div>
+                <div class="vis-label">Cakupan Imunisasi DPT</div>
+              </div>
+            </div>
+            <div class="progress-bars">
+              <div class="prog-item">
+                <span class="prog-label">Akses Air Bersih</span>
+                <div class="prog-track"><div class="prog-fill" style="width:88%; background:#4CAF50"></div></div>
+                <span class="prog-pct">88%</span>
+              </div>
+              <div class="prog-item">
+                <span class="prog-label">Tenaga Kesehatan</span>
+                <div class="prog-track"><div class="prog-fill" style="width:62%; background:#4CAF50"></div></div>
+                <span class="prog-pct">62%</span>
+              </div>
+              <div class="prog-item">
+                <span class="prog-label">Universal Coverage</span>
+                <div class="prog-track"><div class="prog-fill" style="width:73%; background:#4CAF50"></div></div>
+                <span class="prog-pct">73%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SDG 4 CARD -->
+      <div class="focus-card sdg4-card" id="sdg4">
+        <div class="focus-card-left">
+          <div class="sdg-badge sdg4-badge">
+            <span class="sdg-num">4</span>
+          </div>
+          <div class="focus-info">
+            <span class="focus-tag red-tag">SDG 4</span>
+            <h3>Pendidikan Berkualitas</h3>
+            <p class="focus-desc">Menjamin kualitas pendidikan yang inklusif dan merata serta meningkatkan kesempatan belajar sepanjang hayat untuk semua. Pendidikan adalah investasi terbaik untuk masa depan bangsa.</p>
+            <div class="focus-targets">
+              <h4>Target Kunci:</h4>
+              <ul>
+                <li>Semua anak perempuan dan laki-laki menyelesaikan pendidikan dasar dan menengah</li>
+                <li>Akses ke pengembangan anak usia dini dan pra-sekolah dasar berkualitas</li>
+                <li>Akses setara ke pendidikan teknis, kejuruan, dan perguruan tinggi</li>
+                <li>Meningkatkan jumlah pemuda dan orang dewasa yang memiliki keterampilan relevan</li>
+                <li>Menghilangkan disparitas gender dalam pendidikan</li>
+              </ul>
+            </div>
+            <div class="focus-metrics">
+              <div class="metric-chip red-chip"><span>📚</span>Melek Huruf</div>
+              <div class="metric-chip red-chip"><span>🏫</span>Akses Sekolah</div>
+              <div class="metric-chip red-chip"><span>🎓</span>Kualitas Guru</div>
+            </div>
+          </div>
+        </div>
+        <div class="focus-card-right">
+          <div class="focus-visual sdg4-visual">
+            <div class="vis-icon">📖</div>
+            <div class="vis-stat-grid">
+              <div class="vis-stat">
+                <div class="vis-num red-text">96%</div>
+                <div class="vis-label">Angka Partisipasi SD</div>
+              </div>
+              <div class="vis-stat">
+                <div class="vis-num red-text">95%</div>
+                <div class="vis-label">Tingkat Melek Huruf</div>
+              </div>
+              <div class="vis-stat">
+                <div class="vis-num red-text">38%</div>
+                <div class="vis-label">Partisipasi Perguruan Tinggi</div>
+              </div>
+            </div>
+            <div class="progress-bars">
+              <div class="prog-item">
+                <span class="prog-label">Partisipasi SD</span>
+                <div class="prog-track"><div class="prog-fill" style="width:96%; background:#C0392B"></div></div>
+                <span class="prog-pct">96%</span>
+              </div>
+              <div class="prog-item">
+                <span class="prog-label">Partisipasi SMP</span>
+                <div class="prog-track"><div class="prog-fill" style="width:81%; background:#C0392B"></div></div>
+                <span class="prog-pct">81%</span>
+              </div>
+              <div class="prog-item">
+                <span class="prog-label">Kualifikasi Guru</span>
+                <div class="prog-track"><div class="prog-fill" style="width:74%; background:#C0392B"></div></div>
+                <span class="prog-pct">74%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ALL 17 SDGs -->
+  <section class="all-sdgs" id="semua-sdgs">
+    <div class="container">
+      <div class="section-header light-header">
+        <span class="section-eyebrow white-eyebrow">Semua Tujuan</span>
+        <h2 class="white-title">17 Tujuan Pembangunan<br />Berkelanjutan</h2>
+        <p class="white-sub">Agenda 2030 PBB mencakup 17 tujuan yang saling berkaitan untuk transformasi dunia.</p>
+      </div>
+      <div class="sdgs-grid">
+        <!-- SDG 1 -->
+        <div class="sdg-card" style="--accent:#E5243B">
+          <div class="sdg-card-num">1</div>
+          <div class="sdg-card-icon">🏠</div>
+          <h4>Tanpa Kemiskinan</h4>
+          <p>Mengakhiri segala bentuk kemiskinan di semua tempat</p>
+        </div>
+        <!-- SDG 2 -->
+        <div class="sdg-card" style="--accent:#DDA63A">
+          <div class="sdg-card-num">2</div>
+          <div class="sdg-card-icon">🌾</div>
+          <h4>Tanpa Kelaparan</h4>
+          <p>Mencapai ketahanan pangan dan gizi yang baik</p>
+        </div>
+        <!-- SDG 3 FEATURED -->
+        <div class="sdg-card sdg-featured" style="--accent:#4C9F38">
+          <div class="sdg-card-num">3</div>
+          <div class="sdg-card-icon">❤️</div>
+          <h4>Kehidupan Sehat</h4>
+          <p>Kehidupan sehat dan sejahtera untuk semua usia</p>
+          <span class="featured-badge">Fokus Kami</span>
+        </div>
+        <!-- SDG 4 FEATURED -->
+        <div class="sdg-card sdg-featured" style="--accent:#C5192D">
+          <div class="sdg-card-num">4</div>
+          <div class="sdg-card-icon">📚</div>
+          <h4>Pendidikan Berkualitas</h4>
+          <p>Pendidikan inklusif, merata, dan berkualitas</p>
+          <span class="featured-badge">Fokus Kami</span>
+        </div>
+        <!-- SDG 5 -->
+        <div class="sdg-card" style="--accent:#FF3A21">
+          <div class="sdg-card-num">5</div>
+          <div class="sdg-card-icon">♀️</div>
+          <h4>Kesetaraan Gender</h4>
+          <p>Mencapai kesetaraan gender dan memberdayakan perempuan</p>
+        </div>
+        <!-- SDG 6 -->
+        <div class="sdg-card" style="--accent:#26BDE2">
+          <div class="sdg-card-num">6</div>
+          <div class="sdg-card-icon">💧</div>
+          <h4>Air Bersih & Sanitasi</h4>
+          <p>Ketersediaan dan pengelolaan air bersih yang berkelanjutan</p>
+        </div>
+        <!-- SDG 7 -->
+        <div class="sdg-card" style="--accent:#FCC30B">
+          <div class="sdg-card-num">7</div>
+          <div class="sdg-card-icon">⚡</div>
+          <h4>Energi Bersih</h4>
+          <p>Akses ke energi yang terjangkau, andal, dan modern</p>
+        </div>
+        <!-- SDG 8 -->
+        <div class="sdg-card" style="--accent:#A21942">
+          <div class="sdg-card-num">8</div>
+          <div class="sdg-card-icon">💼</div>
+          <h4>Pekerjaan Layak</h4>
+          <p>Pertumbuhan ekonomi inklusif dan pekerjaan layak</p>
+        </div>
+        <!-- SDG 9 -->
+        <div class="sdg-card" style="--accent:#FD6925">
+          <div class="sdg-card-num">9</div>
+          <div class="sdg-card-icon">🏗️</div>
+          <h4>Industri & Inovasi</h4>
+          <p>Infrastruktur tangguh, industrialisasi inklusif, inovasi</p>
+        </div>
+        <!-- SDG 10 -->
+        <div class="sdg-card" style="--accent:#DD1367">
+          <div class="sdg-card-num">10</div>
+          <div class="sdg-card-icon">⚖️</div>
+          <h4>Berkurangnya Kesenjangan</h4>
+          <p>Mengurangi kesenjangan di dalam dan antar negara</p>
+        </div>
+        <!-- SDG 11 -->
+        <div class="sdg-card" style="--accent:#FD9D24">
+          <div class="sdg-card-num">11</div>
+          <div class="sdg-card-icon">🌆</div>
+          <h4>Kota Berkelanjutan</h4>
+          <p>Kota dan komunitas yang inklusif dan berkelanjutan</p>
+        </div>
+        <!-- SDG 12 -->
+        <div class="sdg-card" style="--accent:#BF8B2E">
+          <div class="sdg-card-num">12</div>
+          <div class="sdg-card-icon">♻️</div>
+          <h4>Konsumsi Bertanggung Jawab</h4>
+          <p>Pola konsumsi dan produksi yang berkelanjutan</p>
+        </div>
+        <!-- SDG 13 -->
+        <div class="sdg-card" style="--accent:#3F7E44">
+          <div class="sdg-card-num">13</div>
+          <div class="sdg-card-icon">🌍</div>
+          <h4>Penanganan Perubahan Iklim</h4>
+          <p>Tindakan segera untuk mengatasi perubahan iklim</p>
+        </div>
+        <!-- SDG 14 -->
+        <div class="sdg-card" style="--accent:#0A97D9">
+          <div class="sdg-card-num">14</div>
+          <div class="sdg-card-icon">🐠</div>
+          <h4>Ekosistem Lautan</h4>
+          <p>Konservasi dan pemanfaatan samudra secara berkelanjutan</p>
+        </div>
+        <!-- SDG 15 -->
+        <div class="sdg-card" style="--accent:#56C02B">
+          <div class="sdg-card-num">15</div>
+          <div class="sdg-card-icon">🌳</div>
+          <h4>Ekosistem Daratan</h4>
+          <p>Lindungi, pulihkan ekosistem darat yang berkelanjutan</p>
+        </div>
+        <!-- SDG 16 -->
+        <div class="sdg-card" style="--accent:#00689D">
+          <div class="sdg-card-num">16</div>
+          <div class="sdg-card-icon">🕊️</div>
+          <h4>Perdamaian & Keadilan</h4>
+          <p>Perdamaian, keadilan, dan kelembagaan yang kuat</p>
+        </div>
+        <!-- SDG 17 -->
+        <div class="sdg-card" style="--accent:#19486A">
+          <div class="sdg-card-num">17</div>
+          <div class="sdg-card-icon">🤝</div>
+          <h4>Kemitraan untuk Tujuan</h4>
+          <p>Kemitraan global untuk pembangunan berkelanjutan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESS SECTION -->
+  <section class="progress-section" id="progress">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Status Pencapaian</span>
+        <h2>Progress Indonesia<br />Menuju 2030</h2>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card green-card">
+          <div class="pcard-icon">✅</div>
+          <h4>Di Jalur</h4>
+          <div class="pcard-num">5</div>
+          <p>Tujuan yang sedang berjalan sesuai target</p>
+          <div class="sdg-tags">
+            <span class="stag" style="background:#4C9F38">SDG 3</span>
+            <span class="stag" style="background:#26BDE2">SDG 6</span>
+            <span class="stag" style="background:#56C02B">SDG 15</span>
+            <span class="stag" style="background:#FCC30B; color:#333">SDG 7</span>
+            <span class="stag" style="background:#00689D">SDG 16</span>
+          </div>
+        </div>
+        <div class="progress-card yellow-card">
+          <div class="pcard-icon">⚠️</div>
+          <h4>Perlu Percepatan</h4>
+          <div class="pcard-num">8</div>
+          <p>Tujuan yang membutuhkan upaya lebih</p>
+          <div class="sdg-tags">
+            <span class="stag" style="background:#C5192D">SDG 4</span>
+            <span class="stag" style="background:#FD6925">SDG 9</span>
+            <span class="stag" style="background:#BF8B2E">SDG 12</span>
+            <span class="stag" style="background:#A21942">SDG 8</span>
+            <span class="stag" style="background:#3F7E44">SDG 13</span>
+            <span class="stag" style="background:#FF3A21">SDG 5</span>
+            <span class="stag" style="background:#DD1367">SDG 10</span>
+            <span class="stag" style="background:#FD9D24; color:#333">SDG 11</span>
+          </div>
+        </div>
+        <div class="progress-card red-card">
+          <div class="pcard-icon">🚨</div>
+          <h4>Butuh Perhatian</h4>
+          <div class="pcard-num">4</div>
+          <p>Tujuan yang mengalami kemunduran</p>
+          <div class="sdg-tags">
+            <span class="stag" style="background:#E5243B">SDG 1</span>
+            <span class="stag" style="background:#DDA63A">SDG 2</span>
+            <span class="stag" style="background:#0A97D9">SDG 14</span>
+            <span class="stag" style="background:#19486A">SDG 17</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AKSI / CTA -->
+  <section class="aksi-section" id="aksi">
+    <div class="container">
+      <div class="aksi-inner">
+        <div class="aksi-text">
+          <span class="section-eyebrow white-eyebrow">Bergabung Sekarang</span>
+          <h2 class="white-title">Bersama Kita Bisa<br />Wujudkan Perubahan</h2>
+          <p class="white-sub">Setiap tindakan kecil berarti besar. Mulai dari diri sendiri, keluarga, komunitas, dan Indonesia untuk dunia yang lebih baik.</p>
+          <div class="aksi-options">
+            <div class="aksi-opt">
+              <div class="aksi-icon">🎓</div>
+              <div>
+                <strong>Pendidikan</strong>
+                <p>Dukung program beasiswa dan akses pendidikan untuk anak kurang mampu</p>
+              </div>
+            </div>
+            <div class="aksi-opt">
+              <div class="aksi-icon">🏥</div>
+              <div>
+                <strong>Kesehatan</strong>
+                <p>Daftar sebagai relawan kesehatan atau donasi untuk fasilitas kesehatan pedesaan</p>
+              </div>
+            </div>
+            <div class="aksi-opt">
+              <div class="aksi-icon">📊</div>
+              <div>
+                <strong>Advokasi</strong>
+                <p>Sebarkan informasi dan dorong kebijakan yang mendukung SDGs di lingkungan Anda</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="aksi-form">
+          <h3>Daftarkan Komitmen Anda</h3>
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" placeholder="Nama Anda" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="email@contoh.com" />
+          </div>
+          <div class="form-group">
+            <label>Pilih SDG yang Ingin Anda Dukung</label>
+            <select>
+              <option>SDG 3 – Kesehatan</option>
+              <option>SDG 4 – Pendidikan</option>
+              <option>SDG 1 – Tanpa Kemiskinan</option>
+              <option>SDG 5 – Kesetaraan Gender</option>
+              <option>SDG 13 – Iklim</option>
+              <option>Semua SDGs</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Pesan / Komitmen Anda</label>
+            <textarea placeholder="Ceritakan rencana aksi nyata Anda..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="handleSubmit()">Kirim Komitmen Saya ✨</button>
+          <p id="form-success" class="form-success" style="display:none">✅ Terima kasih! Komitmen Anda telah tercatat. Bersama kita bisa!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-badge">SDGs</span>
+          <p>Mendukung Agenda Pembangunan Berkelanjutan PBB 2030 di Indonesia</p>
+          <div class="footer-social">
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h5>Tujuan</h5>
+          <a href="#sdg3">SDG 3 – Kesehatan</a>
+          <a href="#sdg4">SDG 4 – Pendidikan</a>
+          <a href="#semua-sdgs">Semua 17 SDGs</a>
+        </div>
+        <div class="footer-links">
+          <h5>Aksi</h5>
+          <a href="#aksi">Bergabung</a>
+          <a href="#progress">Progress Indonesia</a>
+          <a href="#">Laporan Tahunan</a>
+        </div>
+        <div class="footer-links">
+          <h5>Sumber</h5>
+          <a href="https://sdgs.un.org" target="_blank">UN SDGs</a>
+          <a href="https://bappenas.go.id" target="_blank">Bappenas</a>
+          <a href="https://sustainabledevelopment.un.org" target="_blank">SDG Reports</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 SDGs Indonesia. Dibangun untuk masa depan yang lebih baik.</p>
+        <p>Data berdasarkan laporan BPS, Bappenas & PBB 2023–2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
