@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refleksi — SDGs Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0f1e; --bg2: #101627; --surface: #151c30;
+      --border: rgba(255,255,255,0.07); --text: #e8eaf0;
+      --muted: #7a8099; --accent-blue: #3b82f6; --accent-green: #22c55e;
+      --accent-purple: #a855f7; --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e; --accent-cyan: #06b6d4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; line-height: 1.7; overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav-logo {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #e8eaf0; text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .topnav-logo span {
+      background: linear-gradient(135deg,#3b82f6,#22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .topnav-links { display: flex; align-items: center; gap: 4px; }
+    .topnav-links a {
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: #7a8099; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .topnav-links a:hover { color: #e8eaf0; background: rgba(255,255,255,0.06); }
+    .topnav-links a.active { color: #e8eaf0; background: rgba(255,255,255,0.09); }
+    @media(max-width:600px){
+      .topnav { padding: 0 16px; }
+      .topnav-links a { padding: 6px 10px; font-size: 12px; }
+      .topnav-logo { font-size: 14px; }
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 120px 24px 56px;
+      max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px; padding: 6px 16px;
+      border-radius: 999px; display: inline-block;
+      color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3);
+      background: rgba(6,182,212,0.08);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px,5vw,60px); font-weight: 700;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--accent-cyan); }
+    .page-desc { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+    .divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* ── REFLEKSI CARDS ── */
+    .refleksi-wrap {
+      max-width: 900px; margin: 64px auto 80px; padding: 0 24px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    .ref-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s;
+    }
+    .ref-card.visible { opacity: 1; transform: translateY(0); }
+
+    .ref-card::before {
+      content: ''; display: block; height: 3px;
+    }
+    .ref-card-1::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
+    .ref-card-2::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+    .ref-card-3::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-rose)); }
+    .ref-card-4::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose)); }
+    .ref-card-5::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green)); }
+
+    .ref-card-1:hover { border-color: rgba(34,197,94,0.25); }
+    .ref-card-2:hover { border-color: rgba(59,130,246,0.25); }
+    .ref-card-3:hover { border-color: rgba(168,85,247,0.25); }
+    .ref-card-4:hover { border-color: rgba(245,158,11,0.25); }
+    .ref-card-5:hover { border-color: rgba(6,182,212,0.25); }
+
+    .ref-card-header {
+      padding: 24px 28px 20px;
+      display: flex; align-items: flex-start; gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ref-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0; margin-top: 2px;
+    }
+    .icon-bg-1 { background: rgba(34,197,94,0.12); }
+    .icon-bg-2 { background: rgba(59,130,246,0.12); }
+    .icon-bg-3 { background: rgba(168,85,247,0.12); }
+    .icon-bg-4 { background: rgba(245,158,11,0.12); }
+    .icon-bg-5 { background: rgba(6,182,212,0.12); }
+
+    .ref-card-meta { flex: 1; }
+    .ref-card-num {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 4px;
+    }
+    .num-1 { color: var(--accent-green); }
+    .num-2 { color: var(--accent-blue); }
+    .num-3 { color: var(--accent-purple); }
+    .num-4 { color: var(--accent-amber); }
+    .num-5 { color: var(--accent-cyan); }
+
+    .ref-card-question {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(15px, 2vw, 18px); font-weight: 700; line-height: 1.35;
+      color: var(--text);
+    }
+
+    .ref-card-body {
+      padding: 24px 28px;
+      font-size: 15px; color: var(--muted); line-height: 1.85;
+    }
+    .ref-card-body p { margin-bottom: 16px; }
+    .ref-card-body p:last-child { margin-bottom: 0; }
+    .ref-card-body strong { color: var(--text); font-weight: 600; }
+
+    /* Highlight callout inside body */
+    .ref-callout {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px; margin: 16px 0;
+      font-size: 14px; line-height: 1.7;
+    }
+    .ref-callout-label {
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 6px;
+    }
+
+    /* Sub-items inside a card */
+    .ref-sub-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;
+    }
+    @media(max-width:600px) { .ref-sub-grid { grid-template-columns: 1fr; } }
+
+    .ref-sub-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .ref-sub-item-label {
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 6px;
+    }
+    .label-challenge { color: var(--accent-rose); }
+    .label-impression { color: var(--accent-amber); }
+    .label-group1 { color: var(--accent-blue); }
+    .label-group2 { color: var(--accent-green); }
+
+    .ref-sub-item p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+    .ref-sub-item p strong { color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 24px;
+      text-align: center; color: var(--muted); font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="topnav">
+  <a class="topnav-logo" href="index.html">🌍 <span>SDGs</span> Indonesia</a>
+  <div class="topnav-links">
+    <a href="index.html">Beranda</a>
+    <a href="bukti-masalah.html">Bukti Masalah</a>
+    <a href="metrik-empati.html">Metrik Empati</a>
+    <a href="mindmap.html">Mindmap</a>
+    <a href="lean-canvas.html">Lean Canvas</a>
+    <a href="video.html">Video</a>
+    <a href="refleksi.html" class="active">Refleksi</a>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="eyebrow">Refleksi · Design Thinking & SDGs</div>
+  <h1 class="page-title">Pengalaman Proses <em>Design Thinking</em><br>dan Tujuan Global UN</h1>
+  <p class="page-desc">Refleksi mendalam atas perjalanan merancang inovasi sistem digitalisasi rumah sakit — dari identifikasi masalah hingga prototipe yang berpusat pada pengguna.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── REFLEKSI CONTENT ── -->
+<div class="refleksi-wrap">
+
+  <!-- CARD 1 -->
+  <div class="ref-card ref-card-1">
+    <div class="ref-card-header">
+      <div class="ref-card-icon icon-bg-1">🌍</div>
+      <div class="ref-card-meta">
+        <div class="ref-card-num num-1">Pertanyaan 01</div>
+        <div class="ref-card-question">Mengapa SDGs PBB relevan dengan inovator, penemu, dan desainer abad ke-21?</div>
+      </div>
+    </div>
+    <div class="ref-card-body">
+      <p>Sebagai mahasiswa STEM, saya menyadari bahwa Tujuan Pembangunan Berkelanjutan (SDGs) PBB sangat relevan karena berfungsi sebagai <strong>kompas atau pedoman dalam berinovasi</strong>. Melalui perancangan sistem digitalisasi rumah sakit ini, saya belajar bahwa teknologi yang diciptakan tidak boleh hanya sekadar canggih secara teknis, tetapi harus mampu memberikan solusi nyata bagi masalah masyarakat — khususnya sejalan dengan poin ke-3 SDGs, yaitu <strong>Kehidupan Sehat dan Sejahtera</strong>.</p>
+      <p>SDGs mengingatkan inovator abad ke-21 bahwa setiap desain dan penemuan harus berorientasi pada <strong>dampak sosial yang positif dan terukur</strong>.</p>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="ref-card ref-card-2">
+    <div class="ref-card-header">
+      <div class="ref-card-icon icon-bg-2">🗺️</div>
+      <div class="ref-card-meta">
+        <div class="ref-card-num num-2">Pertanyaan 02</div>
+        <div class="ref-card-question">Strategi mana yang menurut Anda paling membantu dan mengapa?</div>
+      </div>
+    </div>
+    <div class="ref-card-body">
+      <p>Strategi yang menurut saya paling membantu adalah <strong>User Journey Mapping (Pemetaan Perjalanan Pengguna)</strong>. Pada tahap awal pengembangan prototipe, saya sempat mengalami kesulitan dalam menentukan prioritas fitur untuk memangkas antrean.</p>
+      <div class="ref-callout">
+        <div class="ref-callout-label" style="color: var(--accent-blue);">Proses Pemetaan</div>
+        Dengan memetakan langkah demi langkah pengalaman pasien — mulai dari pendaftaran, ruang tunggu, pemeriksaan dokter, hingga pengambilan obat — saya dapat mengidentifikasi secara spesifik titik-titik kesulitan (<em>pain points</em>) yang mereka hadapi.
+      </div>
+      <p>Pemetaan ini sangat membantu saya dalam menyusun <strong>alur sistem yang lebih efektif dan tepat sasaran</strong>.</p>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="ref-card ref-card-3">
+    <div class="ref-card-header">
+      <div class="ref-card-icon icon-bg-3">💬</div>
+      <div class="ref-card-meta">
+        <div class="ref-card-num num-3">Pertanyaan 03</div>
+        <div class="ref-card-question">Mengapa menerima umpan balik begitu penting dalam desain? Siapa yang akan Anda minta lebih banyak umpan balik?</div>
+      </div>
+    </div>
+    <div class="ref-card-body">
+      <p>Menerima umpan balik sangat penting dalam proses desain karena berfungsi sebagai <strong>validasi objektif terhadap asumsi kita</strong>. Terkadang, desain sistem rekam medis yang menurut saya sebagai perancang sudah sangat logis dan mudah, ternyata masih membingungkan saat diuji coba oleh pengguna lain.</p>
+      <p>Jika memungkinkan, saya akan meminta lebih banyak umpan balik dari dua kelompok utama:</p>
+      <div class="ref-sub-grid">
+        <div class="ref-sub-item">
+          <div class="ref-sub-item-label label-group1">Kelompok 1</div>
+          <p><strong>Pasien lanjut usia</strong> — umumnya memiliki tingkat literasi dan adaptasi teknologi yang lebih rendah. Jika antarmuka sistem antrian dapat dipahami dan digunakan dengan mudah oleh lansia, maka sistem tersebut sudah pasti ramah pengguna bagi kalangan usia lainnya.</p>
+        </div>
+        <div class="ref-sub-item">
+          <div class="ref-sub-item-label label-group2">Kelompok 2</div>
+          <p><strong>Staf perawat/administrasi rumah sakit</strong> — merupakan <em>end-user</em> yang berinteraksi langsung dengan sistem rekam medis setiap hari. Umpan balik mereka sangat krusial untuk memastikan prototipe ini benar-benar mempermudah alur kerja mereka, bukan justru menambah kerumitan administrasi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="ref-card ref-card-4">
+    <div class="ref-card-header">
+      <div class="ref-card-icon icon-bg-4">⚡</div>
+      <div class="ref-card-meta">
+        <div class="ref-card-num num-4">Pertanyaan 04</div>
+        <div class="ref-card-question">Tahap Design Thinking mana yang paling menantang? Tahap mana yang paling berkesan?</div>
+      </div>
+    </div>
+    <div class="ref-card-body">
+      <div class="ref-sub-grid">
+        <div class="ref-sub-item">
+          <div class="ref-sub-item-label label-challenge">Paling Menantang</div>
+          <p><strong>Tahap Define.</strong> Saat melakukan analisis, saya menemukan banyak sekali kendala di rumah sakit. Tantangan terbesarnya adalah menahan keinginan untuk menciptakan solusi bagi semua masalah dalam satu waktu, yang berisiko membuat sistem menjadi terlalu rumit. Saya memutuskan untuk memfokuskan batasan masalah hanya pada <strong>pemangkasan antrean dan pemantauan rekam medis</strong>.</p>
+        </div>
+        <div class="ref-sub-item">
+          <div class="ref-sub-item-label label-impression">Paling Berkesan</div>
+          <p><strong>Tahap Prototyping.</strong> Terdapat kepuasan tersendiri ketika saya dapat memvisualisasikan ide dan gagasan abstrak yang awalnya hanya berupa rancangan kasar menjadi sebuah <strong>antarmuka digital yang nyata, interaktif, dan dapat diuji coba secara langsung</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 5 -->
+  <div class="ref-card ref-card-5">
+    <div class="ref-card-header">
+      <div class="ref-card-icon icon-bg-5">✨</div>
+      <div class="ref-card-meta">
+        <div class="ref-card-num num-5">Pertanyaan 05</div>
+        <div class="ref-card-question">Apa keterampilan/ide/konsep paling signifikan yang Anda peroleh semester ini?</div>
+      </div>
+    </div>
+    <div class="ref-card-body">
+      <p>Konsep paling signifikan yang saya peroleh pada semester ini adalah <strong>User-Centered Design</strong> — Desain Berpusat pada Pengguna — dan pentingnya berempati.</p>
+      <div class="ref-callout">
+        <div class="ref-callout-label" style="color: var(--accent-cyan);">Perubahan Paradigma</div>
+        Sebelumnya, saya beranggapan bahwa fokus utama dalam bidang STEM hanyalah pada kemampuan teknis, seperti pemrograman atau perakitan sistem. Namun, melalui proyek ini, saya menyadari bahwa secanggih apapun sistem rumah sakit yang saya rancang, sistem tersebut akan kehilangan fungsinya jika pasien dan tenaga medis merasa kesulitan saat menggunakannya.
+      </div>
+      <p>Saya belajar bahwa <strong>empati terhadap pengguna sama pentingnya dengan keterampilan teknis</strong> dalam menciptakan inovasi yang berhasil.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Dibuat dengan ❤️ untuk mendukung <strong>Agenda 2030</strong> Indonesia &nbsp;·&nbsp; Data bersumber dari BPS, Kemenkes, OECD, dan lembaga resmi lainnya.</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.5">SDGs Indonesia · Tujuan Pembangunan Berkelanjutan · 2024</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.ref-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

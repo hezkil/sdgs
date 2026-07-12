@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lean Canvas — SDGs Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0f1e; --bg2: #101627; --surface: #151c30;
+      --border: rgba(255,255,255,0.07); --text: #e8eaf0;
+      --muted: #7a8099; --accent-blue: #3b82f6; --accent-green: #22c55e;
+      --accent-purple: #a855f7; --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e; --accent-cyan: #06b6d4;
+      --accent-orange: #f97316;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; line-height: 1.7; overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav-logo {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #e8eaf0; text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .topnav-logo span {
+      background: linear-gradient(135deg,#3b82f6,#22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .topnav-links { display: flex; align-items: center; gap: 4px; }
+    .topnav-links a {
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: #7a8099; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .topnav-links a:hover { color: #e8eaf0; background: rgba(255,255,255,0.06); }
+    .topnav-links a.active { color: #e8eaf0; background: rgba(255,255,255,0.09); }
+    @media(max-width:600px){
+      .topnav { padding: 0 16px; }
+      .topnav-links a { padding: 6px 10px; font-size: 12px; }
+      .topnav-logo { font-size: 14px; }
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 120px 24px 64px;
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px; padding: 6px 16px;
+      border-radius: 999px; display: inline-block;
+      color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.3);
+      background: rgba(168,85,247,0.08);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px,5vw,60px); font-weight: 700;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--accent-purple); }
+    .page-desc { color: var(--muted); font-size: 16px; max-width: 620px; margin: 0 auto; }
+
+    .divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* ── CANVAS GRID ── */
+    .canvas-wrap {
+      max-width: 1200px; margin: 56px auto 40px; padding: 0 24px;
+    }
+
+    .canvas-title-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-bottom: 28px;
+    }
+    .canvas-title-bar h2 {
+      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+    }
+    .canvas-badge {
+      background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 600;
+      color: var(--accent-purple); letter-spacing: 0.05em;
+    }
+
+    /* ── THE CANVAS ── */
+    .lc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto;
+      gap: 10px;
+      min-height: 520px;
+    }
+
+    .lc-cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lc-cell:hover {
+      transform: translateY(-2px);
+    }
+    .lc-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    /* Color accent lines per block */
+    .lc-problem::before   { background: var(--accent-rose); }
+    .lc-solution::before  { background: var(--accent-green); }
+    .lc-uvp::before       { background: var(--accent-purple); }
+    .lc-advantage::before { background: var(--accent-amber); }
+    .lc-segments::before  { background: var(--accent-blue); }
+    .lc-metrics::before   { background: var(--accent-cyan); }
+    .lc-channels::before  { background: var(--accent-orange); }
+    .lc-cost::before      { background: #ef4444; }
+    .lc-revenue::before   { background: var(--accent-green); }
+
+    /* Cell hover glow tints */
+    .lc-problem:hover   { border-color: rgba(244,63,94,0.3); }
+    .lc-solution:hover  { border-color: rgba(34,197,94,0.3); }
+    .lc-uvp:hover       { border-color: rgba(168,85,247,0.3); }
+    .lc-advantage:hover { border-color: rgba(245,158,11,0.3); }
+    .lc-segments:hover  { border-color: rgba(59,130,246,0.3); }
+    .lc-metrics:hover   { border-color: rgba(6,182,212,0.3); }
+    .lc-channels:hover  { border-color: rgba(249,115,22,0.3); }
+    .lc-cost:hover      { border-color: rgba(239,68,68,0.3); }
+    .lc-revenue:hover   { border-color: rgba(34,197,94,0.3); }
+
+    /* Grid placement */
+    .lc-problem   { grid-column: 1; grid-row: 1; }
+    .lc-solution  { grid-column: 2; grid-row: 1; }
+    .lc-uvp       { grid-column: 3; grid-row: 1; }
+    .lc-advantage { grid-column: 4; grid-row: 1; }
+    .lc-segments  { grid-column: 5; grid-row: 1; }
+    .lc-metrics   { grid-column: 1; grid-row: 2; }
+    .lc-channels  { grid-column: 2 / 4; grid-row: 2; }
+    .lc-cost      { grid-column: 4; grid-row: 2; }
+    .lc-revenue   { grid-column: 5; grid-row: 2; }
+
+    /* Bottom row alt: cost+revenue spanning */
+    .lc-cost-revenue-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .lc-cell-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 12px; flex-shrink: 0;
+    }
+    .icon-rose     { background: rgba(244,63,94,0.12); }
+    .icon-green    { background: rgba(34,197,94,0.12); }
+    .icon-purple   { background: rgba(168,85,247,0.12); }
+    .icon-amber    { background: rgba(245,158,11,0.12); }
+    .icon-blue     { background: rgba(59,130,246,0.12); }
+    .icon-cyan     { background: rgba(6,182,212,0.12); }
+    .icon-orange   { background: rgba(249,115,22,0.12); }
+    .icon-red      { background: rgba(239,68,68,0.12); }
+
+    .lc-cell-num {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.08em; opacity: 0.5;
+    }
+    .lc-cell-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 8px;
+    }
+    .label-rose     { color: var(--accent-rose); }
+    .label-green    { color: var(--accent-green); }
+    .label-purple   { color: var(--accent-purple); }
+    .label-amber    { color: var(--accent-amber); }
+    .label-blue     { color: var(--accent-blue); }
+    .label-cyan     { color: var(--accent-cyan); }
+    .label-orange   { color: var(--accent-orange); }
+    .label-red      { color: #ef4444; }
+
+    .lc-cell-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 700; margin-bottom: 14px; line-height: 1.3;
+    }
+    .lc-list {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+    .lc-list li {
+      font-size: 13px; color: var(--muted); line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    .lc-list li::before {
+      content: '';
+      position: absolute; left: 0; top: 8px;
+      width: 5px; height: 5px; border-radius: 50%;
+    }
+    .lc-problem  .lc-list li::before { background: var(--accent-rose); }
+    .lc-solution .lc-list li::before { background: var(--accent-green); }
+    .lc-uvp      .lc-list li::before { background: var(--accent-purple); }
+    .lc-advantage .lc-list li::before { background: var(--accent-amber); }
+    .lc-segments .lc-list li::before { background: var(--accent-blue); }
+    .lc-metrics  .lc-list li::before { background: var(--accent-cyan); }
+    .lc-channels .lc-list li::before { background: var(--accent-orange); }
+    .lc-cost     .lc-list li::before { background: #ef4444; }
+    .lc-revenue  .lc-list li::before { background: var(--accent-green); }
+
+    .lc-list li strong { color: var(--text); font-weight: 600; }
+
+    /* UVP highlight */
+    .uvp-highlight {
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
+      font-size: 13px; font-weight: 600; color: #d8b4fe; line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* ── BOTTOM FULL-WIDTH ROW ── */
+    .lc-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-top: 10px;
+    }
+    .lc-cost-cell, .lc-revenue-cell {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 28px; position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lc-cost-cell::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: #ef4444; border-radius: 14px 14px 0 0;
+    }
+    .lc-revenue-cell::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--accent-green); border-radius: 14px 14px 0 0;
+    }
+    .lc-cost-cell:hover { border-color: rgba(239,68,68,0.3); transform: translateY(-2px); }
+    .lc-revenue-cell:hover { border-color: rgba(34,197,94,0.3); transform: translateY(-2px); }
+    .cost-grid, .revenue-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;
+    }
+    .cost-item, .revenue-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+    }
+    .cost-item-label, .revenue-item-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 600; margin-bottom: 4px;
+    }
+    .cost-item-label { color: #ef4444; }
+    .revenue-item-label { color: var(--accent-green); }
+    .cost-item-text, .revenue-item-text {
+      font-size: 12px; color: var(--muted); line-height: 1.5;
+    }
+
+    /* ── SDG TAG ── */
+    .sdg-tags {
+      max-width: 1200px; margin: 0 auto 16px; padding: 0 24px;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .sdg-tag-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .sdg-pill {
+      font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px;
+    }
+    .sdg3-pill { background: rgba(76,159,56,0.15); color: #4caf50; border: 1px solid rgba(76,159,56,0.3); }
+    .sdg16-pill { background: rgba(0,104,157,0.15); color: #0097d9; border: 1px solid rgba(0,104,157,0.3); }
+
+    /* ── INSIGHT CARDS ── */
+    .insight-section {
+      max-width: 1200px; margin: 48px auto 80px; padding: 0 24px;
+    }
+    .insight-header {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-blue); font-weight: 600; margin-bottom: 20px;
+    }
+    .insight-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;
+    }
+    .insight-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s;
+    }
+    .insight-card.visible { opacity: 1; transform: translateY(0); }
+    .insight-card:hover { border-color: rgba(59,130,246,0.25); }
+    .insight-icon { font-size: 24px; margin-bottom: 12px; }
+    .insight-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .insight-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 24px;
+      text-align: center; color: var(--muted); font-size: 14px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .lc-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .lc-problem   { grid-column: 1; grid-row: 1; }
+      .lc-solution  { grid-column: 2; grid-row: 1; }
+      .lc-uvp       { grid-column: 1 / 3; grid-row: 2; }
+      .lc-advantage { grid-column: 1; grid-row: 3; }
+      .lc-segments  { grid-column: 2; grid-row: 3; }
+      .lc-metrics   { grid-column: 1; grid-row: 4; }
+      .lc-channels  { grid-column: 2; grid-row: 4; }
+      .lc-cost      { grid-column: 1; grid-row: 5; }
+      .lc-revenue   { grid-column: 2; grid-row: 5; }
+      .lc-bottom-row { grid-template-columns: 1fr; }
+      .cost-grid, .revenue-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .lc-grid { grid-template-columns: 1fr; }
+      .lc-problem, .lc-solution, .lc-uvp, .lc-advantage,
+      .lc-segments, .lc-metrics, .lc-channels, .lc-cost, .lc-revenue {
+        grid-column: 1; grid-row: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="topnav">
+  <a class="topnav-logo" href="index.html">🌍 <span>SDGs</span> Indonesia</a>
+  <div class="topnav-links">
+    <a href="index.html">Beranda</a>
+    <a href="bukti-masalah.html">Bukti Masalah</a>
+    <a href="metrik-empati.html">Metrik Empati</a>
+    <a href="mindmap.html">Mindmap</a>
+    <a href="lean-canvas.html" class="active">Lean Canvas</a>
+    <a href="video.html">Video</a>
+    <a href="refleksi.html">Refleksi</a>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="eyebrow">Lean Canvas · Inovasi Antrean Digital</div>
+  <h1 class="page-title">Model Bisnis <em>Human-Centered</em><br>Digitalisasi Pelayanan RS</h1>
+  <p class="page-desc">Kerangka strategis sembilan blok untuk inovasi sistem antrean rumah sakit berbasis aksesibilitas inklusif — mendukung SDG 3 Kesehatan yang Baik dan SDG 16 Institusi yang Kuat.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── SDG TAGS ── -->
+<div class="sdg-tags" style="margin-top: 32px;">
+  <span class="sdg-tag-label">Target SDGs:</span>
+  <span class="sdg-pill sdg3-pill">SDG 3 — Kesehatan yang Baik</span>
+  <span class="sdg-pill sdg16-pill">SDG 16 — Institusi yang Kuat</span>
+</div>
+
+<!-- ── CANVAS TITLE BAR ── -->
+<div class="canvas-wrap">
+  <div class="canvas-title-bar">
+    <div>
+      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-purple);font-weight:600;margin-bottom:6px">Kerangka Strategi</div>
+      <h2>Lean Canvas — Sistem Antrean Nirkertas & Inklusif</h2>
+    </div>
+    <span class="canvas-badge">RS Bhayangkara Polri · BPJS</span>
+  </div>
+
+  <!-- ── MAIN 5-COLUMN GRID ── -->
+  <div class="lc-grid">
+
+    <!-- 1. PROBLEM -->
+    <div class="lc-cell lc-problem">
+      <span class="lc-cell-num">01</span>
+      <div class="lc-cell-icon icon-rose">⚠️</div>
+      <div class="lc-cell-label label-rose">Masalah</div>
+      <div class="lc-cell-title">Hambatan Aksesibilitas & Inefisiensi Alur</div>
+      <ul class="lc-list">
+        <li><strong>Hambatan lansia</strong> — Kesulitan kognitif & motorik menavigasi UI aplikasi rumah sakit yang rumit</li>
+        <li><strong>Time disparity</strong> — Waktu tunggu pasien online vs offline tidak berbeda signifikan</li>
+        <li><strong>Birokrasi ganda</strong> — Pasien online tetap wajib antre di loket pusat untuk validasi fisik ulang</li>
+      </ul>
+    </div>
+
+    <!-- 2. SOLUTION -->
+    <div class="lc-cell lc-solution">
+      <span class="lc-cell-num">02</span>
+      <div class="lc-cell-icon icon-green">✅</div>
+      <div class="lc-cell-label label-green">Solusi</div>
+      <div class="lc-cell-title">Tiga Pilar Inovasi Digital Inklusif</div>
+      <ul class="lc-list">
+        <li><strong>Inclusive UI/UX</strong> — Kontras tinggi (WCAG AAA), ikon besar, voice command mikrofon</li>
+        <li><strong>Paperless & Seamless</strong> — Tanpa QR scan; cukup sebutkan nama ke petugas poli</li>
+        <li><strong>Desentralisasi verifikasi</strong> — Validasi langsung di unit poli tujuan, loket pusat dieleminasi</li>
+      </ul>
+    </div>
+
+    <!-- 3. UVP -->
+    <div class="lc-cell lc-uvp">
+      <span class="lc-cell-num">03</span>
+      <div class="lc-cell-icon icon-purple">💎</div>
+      <div class="lc-cell-label label-purple">Proposisi Nilai Unik</div>
+      <div class="lc-cell-title">Nilai Pembeda Utama</div>
+      <div class="uvp-highlight">
+        "Human-Centered Digitalization" — Kecanggihan sistem bekerja di belakang layar, kemudahan interaksi verbal manusia tetap di depan layar.
+      </div>
+      <ul class="lc-list">
+        <li>Datang → sebutkan nama → langsung dilayani. Semudah itu.</li>
+        <li>Psikologis aman bagi lansia — interaksi dengan petugas, bukan mesin</li>
+      </ul>
+    </div>
+
+    <!-- 4. UNFAIR ADVANTAGE -->
+    <div class="lc-cell lc-advantage">
+      <span class="lc-cell-num">04</span>
+      <div class="lc-cell-icon icon-amber">🏆</div>
+      <div class="lc-cell-label label-amber">Keunggulan Kompetitif</div>
+      <div class="lc-cell-title">Keunggulan yang Sulit Ditiru</div>
+      <ul class="lc-list">
+        <li><strong>Sinergi real-time</strong> — Basis data JKN/BPJS/NIK terintegrasi langsung ke gawai petugas poli</li>
+        <li><strong>SOP Verbal terlatih</strong> — Pendampingan langsung petugas, bukan kios digital "dingin"</li>
+        <li><strong>Trust psikologis</strong> — Rasa aman yang tidak bisa direplikasi mesin kios otomatis</li>
+      </ul>
+    </div>
+
+    <!-- 5. CUSTOMER SEGMENTS -->
+    <div class="lc-cell lc-segments">
+      <span class="lc-cell-num">05</span>
+      <div class="lc-cell-icon icon-blue">👥</div>
+      <div class="lc-cell-label label-blue">Segmen Pengguna</div>
+      <div class="lc-cell-title">Target Audiens Utama</div>
+      <ul class="lc-list">
+        <li><strong>Pasien BPJS Rawat Jalan</strong> — Butuh kepastian antrean & pelayanan lebih cepat</li>
+        <li><strong>Kelompok Rentan</strong> — Lansia (60+), difabel tunanetra/motorik, gaptek</li>
+        <li><strong>Early Adopters</strong> — Pasien kronis (diabetes, jantung, geriatri) kontrol rutin RS Bhayangkara</li>
+      </ul>
+    </div>
+
+    <!-- 6. KEY METRICS -->
+    <div class="lc-cell lc-metrics">
+      <span class="lc-cell-num">06</span>
+      <div class="lc-cell-icon icon-cyan">📊</div>
+      <div class="lc-cell-label label-cyan">Metrik Kunci</div>
+      <div class="lc-cell-title">Indikator Keberhasilan</div>
+      <ul class="lc-list">
+        <li><strong>Patient Turnaround Time</strong> — Penurunan waktu sejak tiba hingga dipanggil masuk ruang dokter</li>
+        <li><strong>Elderly Adoption Rate</strong> — % kenaikan lansia (60+) berhasil reservasi mandiri via voice command</li>
+        <li><strong>Queue Diversion Ratio</strong> — Penurunan volume loket pusat minimal <strong>40–50%</strong></li>
+      </ul>
+    </div>
+
+    <!-- 7. CHANNELS -->
+    <div class="lc-cell lc-channels">
+      <span class="lc-cell-num">07</span>
+      <div class="lc-cell-icon icon-orange">📡</div>
+      <div class="lc-cell-label label-orange">Saluran Distribusi</div>
+      <div class="lc-cell-title">Cara Menjangkau Pasien & Petugas</div>
+      <ul class="lc-list">
+        <li><strong>Aplikasi mobile inklusif</strong> — Reservasi mandiri dengan voice command & UI aksesibel untuk pasien di rumah</li>
+        <li><strong>Integrasi API SatuSehat & BPJS</strong> — Validasi data otomatis tanpa input manual berulang</li>
+        <li><strong>Gawai petugas poli</strong> — Tablet/komputer di meja administrasi setiap unit poliklinik spesifik</li>
+        <li><strong>Fingerprint desentralisasi</strong> — Alat pemindai di tiap poli, bukan hanya loket pusat</li>
+      </ul>
+    </div>
+
+    <!-- 8. COST STRUCTURE -->
+    <div class="lc-cell lc-cost">
+      <span class="lc-cell-num">08</span>
+      <div class="lc-cell-icon icon-red">💸</div>
+      <div class="lc-cell-label label-red">Struktur Biaya</div>
+      <div class="lc-cell-title">Perkiraan Pengeluaran</div>
+      <ul class="lc-list">
+        <li><strong>Software</strong> — UI/UX inklusif, integrasi API BPJS/SatuSehat, modul speech-to-text</li>
+        <li><strong>Hardware</strong> — Tablet/komputer & fingerprint scanner per unit poli</li>
+        <li><strong>SDM</strong> — Pelatihan SOP verbal & change management petugas administrasi</li>
+      </ul>
+    </div>
+
+    <!-- 9. REVENUE STREAMS -->
+    <div class="lc-cell lc-revenue">
+      <span class="lc-cell-num">09</span>
+      <div class="lc-cell-icon icon-green">💰</div>
+      <div class="lc-cell-label label-green">Arus Nilai</div>
+      <div class="lc-cell-title">Sumber Nilai & Efisiensi</div>
+      <ul class="lc-list">
+        <li><strong>Hemat operasional</strong> — Eliminasi kertas tiket & optimasi staf loket pusat</li>
+        <li><strong>Peningkatan kapasitas</strong> — Alur cepat = kuota pasien per hari lebih tinggi</li>
+        <li><strong>Marketplace farmasi</strong> — Komisi dari integrasi layanan obat pihak ketiga dalam aplikasi</li>
+      </ul>
+    </div>
+
+  </div><!-- end .lc-grid -->
+
+  <!-- ── EXPANDED COST & REVENUE ROW ── -->
+  <div class="lc-bottom-row">
+
+    <div class="lc-cost-cell">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#ef4444">Rincian Struktur Biaya</div>
+      </div>
+      <div class="cost-grid">
+        <div class="cost-item">
+          <div class="cost-item-label">Pengembangan Software</div>
+          <div class="cost-item-text">Desain UI/UX inklusif, integrasi API BPJS & SatuSehat, pengembangan modul speech-to-text</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-item-label">Perangkat Keras</div>
+          <div class="cost-item-text">Tablet/komputer ringkas & fingerprint scanner di setiap meja administrasi unit poli</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-item-label">Pelatihan SDM</div>
+          <div class="cost-item-text">Change management & pelatihan SOP pelayanan verbal untuk petugas administrasi poli</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-item-label">Pemeliharaan Sistem</div>
+          <div class="cost-item-text">Biaya berkelanjutan untuk pemeliharaan software, pembaruan keamanan & dukungan teknis</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-revenue-cell">
+      <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--accent-green);margin-bottom:4px">Rincian Arus Nilai & Komersialisasi</div>
+      <div class="revenue-grid">
+        <div class="revenue-item">
+          <div class="revenue-item-label">Efisiensi Operasional</div>
+          <div class="revenue-item-text">Penghematan masif dari eliminasi kertas tiket antrean (paperless) & optimasi alokasi staf loket pusat</div>
+        </div>
+        <div class="revenue-item">
+          <div class="revenue-item-label">Peningkatan Kapasitas</div>
+          <div class="revenue-item-text">Alur cepat meminimalkan waktu tunggu → poliklinik tangani kuota pasien lebih banyak per hari</div>
+        </div>
+        <div class="revenue-item">
+          <div class="revenue-item-label">Marketplace Farmasi</div>
+          <div class="revenue-item-text">Komisi dari integrasi layanan marketplace obat/farmasi pihak ketiga di dalam aplikasi</div>
+        </div>
+        <div class="revenue-item">
+          <div class="revenue-item-label">Kapitasi BPJS</div>
+          <div class="revenue-item-text">Peningkatan volume layanan berpotensi meningkatkan nilai kapitasi yang diterima fasilitas kesehatan</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .lc-bottom-row -->
+</div><!-- end .canvas-wrap -->
+
+<!-- ── KEY INSIGHTS ── -->
+<div class="insight-section">
+  <div class="insight-header">Ringkasan Insight Strategis</div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-icon">🎯</div>
+      <h4>Problem-Solution Fit</h4>
+      <p>Tiga hambatan utama (aksesibilitas, time disparity, birokrasi ganda) dijawab secara tepat oleh tiga pilar solusi yang saling melengkapi dalam satu ekosistem terintegrasi.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon">🔒</div>
+      <h4>Moat yang Kuat</h4>
+      <p>Keunggulan kompetitif terletak pada sinergi sistem teknis + SOP verbal manusia — sebuah kombinasi yang hampir mustahil direplikasi oleh solusi mesin kios otomatis biasa.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon">📈</div>
+      <h4>Metrik yang Terukur</h4>
+      <p>Tiga KPI utama (turnaround time, elderly adoption rate, diversion ratio 40–50%) memberikan target konkret yang dapat diaudit secara objektif dan periodik.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon">🌱</div>
+      <h4>Dampak SDGs Ganda</h4>
+      <p>Inovasi ini menyentuh SDG 3 (akses kesehatan universal) sekaligus SDG 16 (institusi kesehatan publik yang efisien & akuntabel) dalam satu implementasi terpadu.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Dibuat dengan ❤️ untuk mendukung <strong>Agenda 2030</strong> Indonesia &nbsp;·&nbsp; Data bersumber dari BPS, Kemenkes, OECD, dan lembaga resmi lainnya.</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.5">SDGs Indonesia · Tujuan Pembangunan Berkelanjutan · 2024</p>
+</footer>
+
+<script>
+  // Scroll reveal for insight cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.insight-card').forEach(el => observer.observe(el));
+
+  // Scroll reveal for lean canvas cells
+  const cellObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 60);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.lc-cell, .lc-cost-cell, .lc-revenue-cell').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease, border-color 0.2s, box-shadow 0.2s';
+    cellObserver.observe(el);
+  });
+</script>
+</body>
+</html>

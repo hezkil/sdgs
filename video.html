@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Presentasi — SDGs Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0f1e; --bg2: #101627; --surface: #151c30;
+      --border: rgba(255,255,255,0.07); --text: #e8eaf0;
+      --muted: #7a8099; --accent-blue: #3b82f6; --accent-green: #22c55e;
+      --accent-rose: #f43f5e; --accent-amber: #f59e0b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; line-height: 1.7; overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav-logo {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #e8eaf0; text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .topnav-logo span {
+      background: linear-gradient(135deg,#3b82f6,#22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .topnav-links { display: flex; align-items: center; gap: 4px; }
+    .topnav-links a {
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: #7a8099; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .topnav-links a:hover { color: #e8eaf0; background: rgba(255,255,255,0.06); }
+    .topnav-links a.active { color: #e8eaf0; background: rgba(255,255,255,0.09); }
+    @media(max-width:600px){
+      .topnav { padding: 0 16px; }
+      .topnav-links a { padding: 6px 10px; font-size: 12px; }
+      .topnav-logo { font-size: 14px; }
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 120px 24px 56px;
+      max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px; padding: 6px 16px;
+      border-radius: 999px; display: inline-block;
+      color: var(--accent-rose); border: 1px solid rgba(244,63,94,0.3);
+      background: rgba(244,63,94,0.08);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px,5vw,60px); font-weight: 700;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--accent-rose); }
+    .page-desc { color: var(--muted); font-size: 16px; max-width: 580px; margin: 0 auto; }
+
+    .divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* ── VIDEO SECTION ── */
+    .video-wrap {
+      max-width: 900px; margin: 56px auto 0; padding: 0 24px;
+    }
+    .video-container {
+      position: relative; width: 100%; padding-bottom: 56.25%;
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .video-container iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
+    }
+    .video-caption {
+      margin-top: 16px; text-align: center;
+      font-size: 13px; color: var(--muted);
+    }
+    .video-caption a {
+      color: var(--accent-blue); text-decoration: none; font-weight: 600;
+    }
+    .video-caption a:hover { text-decoration: underline; }
+
+    /* ── SCRIPT SECTION ── */
+    .script-wrap {
+      max-width: 900px; margin: 64px auto 0; padding: 0 24px;
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-blue); font-weight: 600; margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px,3vw,36px); font-weight: 700; line-height: 1.2;
+      margin-bottom: 28px;
+    }
+    .section-title em { font-style: italic; color: var(--accent-green); }
+
+    .script-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .script-header {
+      padding: 18px 28px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .script-header-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(244,63,94,0.12);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .script-header-title { font-weight: 600; font-size: 15px; }
+    .script-header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .script-body {
+      padding: 28px 32px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .script-paragraph {
+      font-size: 15px; color: var(--muted); line-height: 1.85;
+      padding-left: 20px;
+      border-left: 2px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s;
+    }
+    .script-paragraph:hover {
+      border-left-color: rgba(59,130,246,0.4);
+    }
+    .script-paragraph strong { color: var(--text); }
+
+    /* ── FEEDBACK SECTION ── */
+    .feedback-wrap {
+      max-width: 900px; margin: 64px auto 80px; padding: 0 24px;
+    }
+    .feedback-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    @media(max-width: 700px) {
+      .feedback-grid { grid-template-columns: 1fr; }
+    }
+
+    .feedback-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.45s ease, transform 0.45s ease, border-color 0.2s;
+    }
+    .feedback-card.visible { opacity: 1; transform: translateY(0); }
+
+    .feedback-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; border-radius: 14px 14px 0 0;
+    }
+    .card-positive::before  { background: var(--accent-green); }
+    .card-negative::before  { background: var(--accent-rose); }
+    .card-improve::before   { background: var(--accent-amber); }
+
+    .card-positive:hover  { border-color: rgba(34,197,94,0.3); }
+    .card-negative:hover  { border-color: rgba(244,63,94,0.3); }
+    .card-improve:hover   { border-color: rgba(245,158,11,0.3); }
+
+    .feedback-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 14px;
+    }
+    .icon-positive { background: rgba(34,197,94,0.12); }
+    .icon-negative { background: rgba(244,63,94,0.12); }
+    .icon-improve  { background: rgba(245,158,11,0.12); }
+
+    .feedback-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 14px;
+    }
+    .label-positive { color: var(--accent-green); }
+    .label-negative { color: var(--accent-rose); }
+    .label-improve  { color: var(--accent-amber); }
+
+    .feedback-list {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .feedback-list li {
+      font-size: 13.5px; color: var(--muted); line-height: 1.55;
+      padding-left: 18px; position: relative;
+    }
+    .feedback-list li::before {
+      content: '';
+      position: absolute; left: 0; top: 8px;
+      width: 5px; height: 5px; border-radius: 50%;
+    }
+    .card-positive .feedback-list li::before { background: var(--accent-green); }
+    .card-negative .feedback-list li::before { background: var(--accent-rose); }
+    .card-improve  .feedback-list li::before { background: var(--accent-amber); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 24px;
+      text-align: center; color: var(--muted); font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="topnav">
+  <a class="topnav-logo" href="index.html">🌍 <span>SDGs</span> Indonesia</a>
+  <div class="topnav-links">
+    <a href="index.html">Beranda</a>
+    <a href="bukti-masalah.html">Bukti Masalah</a>
+    <a href="metrik-empati.html">Metrik Empati</a>
+    <a href="mindmap.html">Mindmap</a>
+    <a href="lean-canvas.html">Lean Canvas</a>
+    <a href="video.html" class="active">Video</a>
+  </div>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="eyebrow">Video Presentasi · Inovasi Antrean RS</div>
+  <h1 class="page-title">Digitalisasi <em>Tanpa Kerumitan</em><br>untuk Semua Pasien</h1>
+  <p class="page-desc">Penjelasan singkat tentang permasalahan antrean rumah sakit dan solusi inovasi sistem reservasi online yang inklusif dan efisien.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── VIDEO ── -->
+<div class="video-wrap" style="margin-top: 56px;">
+  <div class="video-container">
+    <iframe
+      src="https://drive.google.com/file/d/151o1qHcKGszyeIdJedFZPc9LEwZ6yOmj/preview"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <p class="video-caption">
+    Tidak bisa diputar? &nbsp;
+    <a href="https://drive.google.com/file/d/151o1qHcKGszyeIdJedFZPc9LEwZ6yOmj/view?usp=drive_link" target="_blank" rel="noopener">Buka di Google Drive ↗</a>
+  </p>
+</div>
+
+<!-- ── SCRIPT ── -->
+<div class="script-wrap">
+  <div class="section-label">Narasi Video</div>
+  <h2 class="section-title">Skrip <em>Lengkap</em> Presentasi</h2>
+
+  <div class="script-box">
+    <div class="script-header">
+      <div class="script-header-icon">🎙️</div>
+      <div>
+        <div class="script-header-title">Narasi Kelompok 4</div>
+        <div class="script-header-sub">Inovasi Sistem Antrean Digital Rumah Sakit · SDG 3 & SDG 16</div>
+      </div>
+    </div>
+    <div class="script-body">
+
+      <p class="script-paragraph">
+        Pernah gak kalian ngerasain antrian yang panjang di rumah sakit? Sebelum dapat konsul ke dokter, kalian harus berada di antrian panjang untuk ke loket umum. Tentu tahap ini gak bisa dilewati begitu saja. Pasien harus mengantri di loket umum agar dapat mengisi identitas, surat rujukan, keperluan, dan verifikasi sidik jari. Setelah itu, barulah kita dapat mengantri di poliklinik untuk dapat konsultasi dan tindakan dari dokter. Ada gak ya cara untuk persingkat beberapa proses tadi? <strong>Tentu saja ada!</strong>
+      </p>
+
+      <p class="script-paragraph">
+        Sebenarnya ada cara untuk memangkas antrian di loket umum, yaitu dengan cara <strong>daftar online</strong>. Karena saat kita daftar online, kita terlebih dahulu mengisi form terkait identitas, keperluan, dan tanggal konsul. Setelah mendaftar secara online, pasien diharapkan datang sesuai tanggal yang ditentukan. Namun, pada rumah sakit Polri Kramat Jati, kita tetap harus mengantri di loket umum untuk sidik jari lalu setelah itu baru dapat mengantri pada poliklinik yang dituju. Hal tersebut terkesan bahwa antrian offline maupun online hampir tidak ada bedanya. Sehingga kehadiran reservasi online tidak membuat orang tertarik untuk digunakan. Oleh karena itu, perlu adanya keuntungan yang didapat pada saat mendaftar online.
+      </p>
+
+      <p class="script-paragraph">
+        Harus adanya kelebihan yang didapat ketika pasien melakukan reservasi secara online atau digitalisasi rumah sakit, misalnya, antrian lebih cepat. Bagaimana cara tersebut dilakukan? Pastinya sistem harus dibangun untuk mempersingkat antrian. Pasien tidak harus lagi mengantri di loket umum tetapi di poli masing-masing dan dapat melakukan <strong>verifikasi sidik jari di sana</strong>. Dengan begitu pasien tidak harus mengantri pada antrian umum yang terdapat banyak antrian poli yang berbeda agar tidak memakan waktu. Setelah itu barulah rumah sakit dapat melakukan sosialisasi terkait digitalisasi rumah sakit kepada pasien. Oleh karena itu, kami membentuk sebuah <strong>website reservasi online rumah sakit</strong> untuk menyelesaikan masalah tersebut. Website ini akan berguna untuk mengatasi antrian rumah sakit yang panjang. Selain itu juga menghadirkan fitur seperti pemantauan history medis, pengambilan obat, dan lain-lain.
+      </p>
+
+      <p class="script-paragraph">
+        Tentu kesuksesan dari penyelesaian masalah ini adalah sistem website digital rumah sakit diukur melalui <strong>kepuasan pasien terhadap digitalisasi rumah sakit</strong>, misalnya waktu tunggu yang lebih singkat, monitoring rekam medis terpadu, dan fitur digital lainnya.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── FEEDBACK ── -->
+<div class="feedback-wrap">
+  <div class="section-label" style="margin-top: 48px;">Evaluasi Solusi</div>
+  <h2 class="section-title" style="margin-bottom: 28px;">Penilaian <em>Positif, Negatif & Perbaikan</em></h2>
+
+  <div class="feedback-grid">
+
+    <!-- POSITIVE -->
+    <div class="feedback-card card-positive">
+      <div class="feedback-icon icon-positive">✅</div>
+      <div class="feedback-label label-positive">Positive</div>
+      <ul class="feedback-list">
+        <li>Mekanisme antrian terbaru</li>
+        <li>Integrasi sistem rumah sakit</li>
+      </ul>
+    </div>
+
+    <!-- NEGATIVE -->
+    <div class="feedback-card card-negative">
+      <div class="feedback-icon icon-negative">⚠️</div>
+      <div class="feedback-label label-negative">Negative</div>
+      <ul class="feedback-list">
+        <li>Pasien masih sering melakukan pendaftaran offline</li>
+        <li>Pasien bimbang dengan perubahan paradigma baru pada administrasi rumah sakit</li>
+      </ul>
+    </div>
+
+    <!-- IMPROVEMENT -->
+    <div class="feedback-card card-improve">
+      <div class="feedback-icon icon-improve">🔧</div>
+      <div class="feedback-label label-improve">Improvement</div>
+      <ul class="feedback-list">
+        <li>Diperlukan alat fingerprint tambahan pada masing-masing poliklinik</li>
+        <li>Antrian lebih cepat</li>
+        <li>Rekam medis tercatat rapi dan lengkap</li>
+        <li>Fitur lebih banyak</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Dibuat dengan ❤️ untuk mendukung <strong>Agenda 2030</strong> Indonesia &nbsp;·&nbsp; Data bersumber dari BPS, Kemenkes, OECD, dan lembaga resmi lainnya.</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.5">SDGs Indonesia · Tujuan Pembangunan Berkelanjutan · 2024</p>
+</footer>
+
+<script>
+  // Scroll reveal for feedback cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.feedback-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

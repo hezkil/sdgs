@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDGs Indonesia — Tujuan Pembangunan Berkelanjutan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 32px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700;
+      color: #e8eaf0; text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .topnav-logo span {
+      background: linear-gradient(135deg,#3b82f6,#22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .topnav-links { display: flex; align-items: center; gap: 4px; }
+    .topnav-links a {
+      padding: 7px 16px; border-radius: 8px;
+      font-size: 13px; font-weight: 500; color: #7a8099;
+      text-decoration: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .topnav-links a:hover { color: #e8eaf0; background: rgba(255,255,255,0.06); }
+    .topnav-links a.active { color: #e8eaf0; background: rgba(255,255,255,0.09); }
+    @media(max-width:600px){
+      .topnav { padding: 0 16px; }
+      .topnav-links a { padding: 6px 10px; font-size: 12px; }
+      .topnav-logo { font-size: 14px; }
+    }
+  </style>
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --bg2: #101627;
+      --surface: #151c30;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8eaf0;
+      --muted: #7a8099;
+      --accent-blue: #3b82f6;
+      --accent-green: #22c55e;
+      --sdg3: #4CAF50;
+      --sdg4: #C5192D;
+
+      /* SDG colors */
+      --c1:#E5243B;--c2:#DDA63A;--c3:#4C9F38;--c4:#C5192D;
+      --c5:#FF3A21;--c6:#26BDE2;--c7:#FCC30B;--c8:#A21942;
+      --c9:#FD6925;--c10:#DD1367;--c11:#FD9D24;--c12:#BF8B2E;
+      --c13:#3F7E44;--c14:#0A97D9;--c15:#56C02B;--c16:#00689D;--c17:#19486A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(59,130,246,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 70% 60%, rgba(34,197,94,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding: 6px 16px;
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 7vw, 88px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      background: linear-gradient(135deg, #3b82f6, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 19px);
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 56px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 36px;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-hint svg { opacity: 0.5; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── ABOUT SECTION ── */
+    .section {
+      padding: 96px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent-green);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-body p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-body p strong {
+      color: var(--text);
+    }
+
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .pillar-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .pillar-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .pillar-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SDG GRID ── */
+    .sdg-section {
+      padding: 96px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sdg-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .sdg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+
+    .sdg-card {
+      border-radius: 14px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+
+    .sdg-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+
+    .sdg-card.active {
+      border-color: #fff;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.15), 0 16px 40px rgba(0,0,0,0.5);
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .sdg-card.active::after {
+      content: '✓';
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.9);
+      color: #000;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sdg-num {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .sdg-name {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.3;
+      opacity: 0.95;
+      letter-spacing: 0.01em;
+    }
+
+    /* SDG card colors */
+    .sdg-1 { background: var(--c1); }
+    .sdg-2 { background: var(--c2); }
+    .sdg-3 { background: var(--c3); }
+    .sdg-4 { background: var(--c4); }
+    .sdg-5 { background: var(--c5); }
+    .sdg-6 { background: var(--c6); }
+    .sdg-7 { background: var(--c7); color: #111; }
+    .sdg-8 { background: var(--c8); }
+    .sdg-9 { background: var(--c9); }
+    .sdg-10 { background: var(--c10); }
+    .sdg-11 { background: var(--c11); color: #111; }
+    .sdg-12 { background: var(--c12); }
+    .sdg-13 { background: var(--c13); }
+    .sdg-14 { background: var(--c14); }
+    .sdg-15 { background: var(--c15); }
+    .sdg-16 { background: var(--c16); }
+    .sdg-17 { background: var(--c17); }
+    .sdg-7 .sdg-name, .sdg-11 .sdg-name { color: #333; }
+
+    .sdg-select-hint {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── FACTS SECTION ── */
+    .facts-section {
+      padding: 0 24px 96px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .facts-header {
+      margin-bottom: 40px;
+    }
+
+    .facts-badge-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-3 { background: rgba(76,159,56,0.2); color: #4CAF50; border: 1px solid rgba(76,159,56,0.3); }
+    .badge-4 { background: rgba(197,25,45,0.2); color: #e05060; border: 1px solid rgba(197,25,45,0.3); }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .fact-card:hover { border-color: rgba(255,255,255,0.15); }
+
+    .fact-card.span-2 { grid-column: span 2; }
+
+    .fact-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .fact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .fact-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .fact-source {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--accent-blue);
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    .fact-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tag-3 { background: var(--c3); }
+    .tag-4 { background: var(--c4); }
+
+    .fact-highlight {
+      font-size: 28px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    /* ── SWOT ── */
+    .swot-section {
+      padding: 0 24px 96px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .swot-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .swot-tab {
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .swot-tab:hover, .swot-tab.active {
+      background: var(--surface);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .swot-table-wrap {
+      overflow-x: auto;
+    }
+
+    .swot-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .swot-table th {
+      background: var(--surface);
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .swot-table td {
+      padding: 18px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .swot-table tr:last-child td { border-bottom: none; }
+
+    .swot-table td:first-child {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .swot-table td ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .swot-table td ul li::before {
+      content: '→ ';
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .swot-table td ul li.threat::before { color: #f87171; }
+    .swot-table td ul li.strength::before { color: #22c55e; }
+    .swot-table td ul li.opportunity::before { color: #facc15; }
+
+    .tag-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* ── SWOT HIGHLIGHT CARDS ── */
+    .swot-highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .swot-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .swot-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swot-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-s { background: #22c55e; }
+    .dot-w { background: #f59e0b; }
+    .dot-o { background: #3b82f6; }
+    .dot-t { background: #f87171; }
+
+    .swot-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .swot-list li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .swot-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer strong { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .facts-grid { grid-template-columns: 1fr; }
+      .fact-card.span-2 { grid-column: span 1; }
+      .sdg-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+      .swot-highlight-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fadeup { animation: fadeUp 0.7s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .delay-3 { animation-delay: 0.35s; opacity: 0; }
+    .delay-4 { animation-delay: 0.5s; opacity: 0; }
+
+    .progress-ring {
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="topnav-logo" href="index.html">🌍 <span>SDGs</span> Indonesia</a>
+  <div class="topnav-links">
+    <a href="index.html" class="active">Beranda</a>
+    <a href="bukti-masalah.html">Bukti Masalah</a>
+    <a href="metrik-empati.html">Metrik Empati</a>
+    <a href="mindmap.html">Mindmap</a>
+    <a href="lean-canvas.html">Lean Canvas</a>
+    <a href="video.html">Video</a>
+    <a href="refleksi.html">Refleksi</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow fadeup">PBB · Agenda 2030 · Indonesia</div>
+  <h1 class="hero-title fadeup delay-1">
+    Tujuan<br /><span>Pembangunan</span><br />Berkelanjutan
+  </h1>
+  <p class="hero-subtitle fadeup delay-2">
+    17 tujuan global yang disepakati oleh 193 negara anggota PBB pada 2015 untuk mengakhiri kemiskinan, melindungi bumi, dan memastikan kemakmuran bagi semua pada tahun 2030.
+  </p>
+  <div class="hero-stats fadeup delay-3">
+    <div class="stat">
+      <div class="stat-num" style="color:#3b82f6">17</div>
+      <div class="stat-label">Tujuan</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#22c55e">169</div>
+      <div class="stat-label">Target</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#f59e0b">193</div>
+      <div class="stat-label">Negara</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#e05060">2030</div>
+      <div class="stat-label">Tenggat</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Jelajahi</span>
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+      <path d="M8 2v16M2 14l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<div style="max-width:1100px;margin:0 auto;padding:0 24px">
+  <div class="divider"></div>
+</div>
+
+<section class="section">
+  <div class="about-grid">
+    <div class="about-body">
+      <div class="section-label">Apa itu SDGs?</div>
+      <h2 class="section-title">Agenda Global untuk <em>Planet yang Lebih Baik</em></h2>
+      <p>
+        <strong>Sustainable Development Goals (SDGs)</strong>, atau Tujuan Pembangunan Berkelanjutan, adalah rencana aksi global yang diadopsi oleh Perserikatan Bangsa-Bangsa pada September 2015 melalui Resolusi A/RES/70/1.
+      </p>
+      <p>
+        SDGs menggantikan Millennium Development Goals (MDGs) yang berakhir pada 2015, dengan cakupan yang jauh lebih luas — tidak hanya negara berkembang, tetapi seluruh negara di dunia wajib berkontribusi.
+      </p>
+      <p>
+        Indonesia berkomitmen penuh melalui Perpres No. 59 Tahun 2017 yang mengintegrasikan SDGs ke dalam Rencana Pembangunan Jangka Menengah Nasional (RPJMN). Kemajuan dipantau melalui indikator nasional yang disesuaikan dengan konteks Indonesia.
+      </p>
+    </div>
+    <div class="about-pillars">
+      <div style="color:var(--muted); font-size:13px; margin-bottom:8px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">5 Pilar Utama SDGs</div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(59,130,246,0.15)">👥</div>
+        <div>
+          <div class="pillar-title">People — Manusia</div>
+          <div class="pillar-desc">Mengakhiri kemiskinan dan kelaparan, memastikan semua manusia dapat memenuhi potensinya dengan bermartabat.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(34,197,94,0.15)">🌍</div>
+        <div>
+          <div class="pillar-title">Planet — Bumi</div>
+          <div class="pillar-desc">Melindungi planet dari degradasi melalui konsumsi & produksi berkelanjutan, pengelolaan alam secara lestari.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(245,158,11,0.15)">💰</div>
+        <div>
+          <div class="pillar-title">Prosperity — Kemakmuran</div>
+          <div class="pillar-desc">Memastikan semua manusia menikmati kehidupan yang sejahtera dan pemenuhan diri dalam harmoni dengan alam.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(239,68,68,0.15)">🕊️</div>
+        <div>
+          <div class="pillar-title">Peace — Perdamaian</div>
+          <div class="pillar-desc">Mendorong masyarakat yang damai, adil, dan inklusif bebas dari rasa takut dan kekerasan.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(139,92,246,0.15)">🤝</div>
+        <div>
+          <div class="pillar-title">Partnership — Kemitraan</div>
+          <div class="pillar-desc">Memperkuat sarana implementasi melalui kemitraan global yang kuat antara pemerintah, swasta, dan masyarakat sipil.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:1100px;margin:0 auto;padding:0 24px">
+  <div class="divider"></div>
+</div>
+
+<!-- ── SDG GRID ── -->
+<section class="sdg-section">
+  <div class="sdg-header">
+    <div class="section-label" style="text-align:center">17 Tujuan</div>
+    <h2 class="section-title" style="text-align:center">Pilih SDGs untuk Dieksplorasi</h2>
+    <p style="color:var(--muted);max-width:520px;margin:0 auto;font-size:14px;">Klik pada kotak SDGs untuk melihat fakta dan analisis mendalam. SDGs 3 & 4 telah dipilih secara default.</p>
+  </div>
+
+  <div class="sdg-grid" id="sdgGrid">
+    <!-- cards rendered by JS -->
+  </div>
+  <div class="sdg-select-hint">SDGs yang dipilih: <span id="selectedLabel" style="color:var(--text);font-weight:600">SDG 3 — Good Health, SDG 4 — Quality Education</span></div>
+</section>
+
+<div style="max-width:1100px;margin:0 auto;padding:0 24px">
+  <div class="divider"></div>
+</div>
+
+<!-- ── FACTS ── -->
+<section class="facts-section" style="padding-top:80px">
+  <div class="facts-header">
+    <div class="facts-badge-row">
+      <span class="badge badge-3">SDG 3 — Kesehatan yang Baik</span>
+      <span class="badge badge-4">SDG 4 — Pendidikan Berkualitas</span>
+    </div>
+    <h2 class="section-title">5 Fakta Kritis <em>Indonesia</em></h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;">Data terkini yang mengungkap tantangan nyata dalam pencapaian target SDGs 3 dan 4 di Indonesia.</p>
+  </div>
+
+  <div class="facts-grid">
+    <!-- Fact 1 -->
+    <div class="fact-card">
+      <span class="fact-tag tag-3">3</span>
+      <div class="fact-number" style="color:#4CAF50">Fakta 01 · Kematian Ibu</div>
+      <div class="fact-highlight">189 / 100k</div>
+      <div class="fact-title">Menurunkan Angka Kematian Ibu Melahirkan</div>
+      <div class="fact-body">AKI Indonesia saat ini berada di 189 per 100.000 kelahiran hidup (SP 2020). Penyebab utamanya adalah preeklamsia, eklamsia, dan perdarahan — kondisi yang sebenarnya dapat dicegah dengan akses layanan antenatal yang memadai.</div>
+      <span class="fact-source">Diklat Kesehatan UGM — Review Kebijakan AKI 2024</span>
+    </div>
+
+    <!-- Fact 2 -->
+    <div class="fact-card">
+      <span class="fact-tag tag-3">3</span>
+      <div class="fact-number" style="color:#4CAF50">Fakta 02 · Stunting</div>
+      <div class="fact-highlight">19,8%</div>
+      <div class="fact-title">Menghapus Stunting di Bawah 14,2% pada 2029</div>
+      <div class="fact-body">Prevalensi stunting nasional turun dari 21,5% (2023) menjadi 19,8% pada 2024, mencapai sekitar 4,4 juta balita. Namun target 14,2% pada 2029 dan 5% pada 2045 masih memerlukan percepatan yang signifikan.</div>
+      <span class="fact-source">BKPK Kemenkes — SSGI 2024</span>
+    </div>
+
+    <!-- Fact 3 -->
+    <div class="fact-card">
+      <span class="fact-tag tag-3">3</span>
+      <div class="fact-number" style="color:#4CAF50">Fakta 03 · Kematian Bayi</div>
+      <div class="fact-highlight">24 / 1.000</div>
+      <div class="fact-title">Menurunkan Angka Kematian Bayi</div>
+      <div class="fact-body">AKB Indonesia berdasarkan SDKI 2017 adalah 24 per 1.000 kelahiran hidup. Target penurunan menjadi 16 per 1.000 pada 2024 dan 12 per 1.000 pada 2030 memerlukan penguatan infrastruktur kesehatan ibu dan anak secara masif.</div>
+      <span class="fact-source">Pemkab Dairi — AKI & AKB Indonesia</span>
+    </div>
+
+    <!-- Fact 4 -->
+    <div class="fact-card">
+      <span class="fact-tag tag-4">4</span>
+      <div class="fact-number" style="color:#e05060">Fakta 04 · Akses Sekolah</div>
+      <div class="fact-highlight">4,2 Juta</div>
+      <div class="fact-title">Mengeluarkan 4,2 Juta Anak dari Status "Tidak Bersekolah"</div>
+      <div class="fact-body">Berdasarkan data BPS, sebanyak 4,2 juta anak usia 6–18 tahun tidak bersekolah pada 2024. Kesenjangan ekonomi, geografis, dan sosial menjadi hambatan utama akses pendidikan bagi anak-anak Indonesia.</div>
+      <span class="fact-source">Inilah.com / KPAI — Anak Tidak Sekolah 2024</span>
+    </div>
+
+    <!-- Fact 5 -->
+    <div class="fact-card span-2">
+      <span class="fact-tag tag-4">4</span>
+      <div class="fact-number" style="color:#e05060">Fakta 05 · Kualitas Belajar</div>
+      <div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px">
+          <div class="fact-highlight">366 poin</div>
+          <div class="fact-title">Meningkatkan Skor PISA Matematika Menuju ≥ 430</div>
+          <div class="fact-body">Pada PISA 2022, siswa Indonesia meraih 366 poin matematika — jauh di bawah rata-rata OECD (472). Hanya 18% siswa mencapai Level 2 minimum, berbanding 69% rata-rata OECD. Hampir nol siswa menjadi top performer Level 5–6, sementara rata-rata OECD mencapai 9%.</div>
+          <span class="fact-source">OECD Education GPS — Indonesia PISA 2022</span>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center">
+          <div style="background:rgba(197,25,45,0.1);border:1px solid rgba(197,25,45,0.2);border-radius:12px;padding:20px 24px;text-align:center;min-width:120px">
+            <div style="font-size:32px;font-family:'Playfair Display',serif;font-weight:700;color:#e05060">18%</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">Capai Level 2<br/>Indonesia</div>
+          </div>
+          <div style="font-size:24px;color:var(--muted)">vs</div>
+          <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:20px 24px;text-align:center;min-width:120px">
+            <div style="font-size:32px;font-family:'Playfair Display',serif;font-weight:700;color:#3b82f6">69%</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">Capai Level 2<br/>Rata-rata OECD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:1100px;margin:0 auto;padding:0 24px">
+  <div class="divider"></div>
+</div>
+
+<!-- ── SWOT ── -->
+<section class="swot-section" style="padding-top:80px">
+  <div class="section-label">Analisis Mendalam</div>
+  <h2 class="section-title">Analisis SWOT <em>Inovasi Digital</em></h2>
+  <p style="color:var(--muted);font-size:15px;max-width:560px;margin-bottom:48px;">Pemetaan kekuatan, kelemahan, peluang, dan ancaman dari dua inisiatif digital dalam mendukung pencapaian SDGs 3 & 4.</p>
+
+  <div class="swot-tabs">
+    <button class="swot-tab active" onclick="showSwot('all')">Semua Inovasi</button>
+    <button class="swot-tab" onclick="showSwot('info')">Informasi Kesehatan Digital</button>
+    <button class="swot-tab" onclick="showSwot('rekmed')">Rekam Medis Elektronik</button>
+  </div>
+
+  <!-- Innovation 1: Informasi Kesehatan -->
+  <div id="swot-info" class="swot-block">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-green);font-weight:600;margin-bottom:6px">Inovasi 01 · SDG 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px">Informasi Kesehatan Digital</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag-pill">informasi</span>
+            <span class="tag-pill">kesehatan</span>
+            <span class="tag-pill">digital</span>
+          </div>
+        </div>
+        <div style="background:rgba(76,159,56,0.1);border:1px solid rgba(76,159,56,0.2);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Tujuan UN</div>
+          <div style="font-weight:700;color:#4CAF50">SDG 3.8</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="swot-highlight-grid">
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-s"></span>Kekuatan</div>
+        <ul class="swot-list">
+          <li>Sangat mudah diakses oleh masyarakat luas</li>
+          <li>Informasi dapat diakses kapan saja dan di mana saja</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-w"></span>Kelemahan</div>
+        <ul class="swot-list">
+          <li>Membutuhkan pengetahuan dasar digital (sulit untuk lansia)</li>
+          <li>Informasi digital bisa bersifat satu arah</li>
+          <li>Tidak semua platform memiliki standar peninjauan medis</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-o"></span>Peluang</div>
+        <ul class="swot-list">
+          <li>Pengguna internet Indonesia cukup banyak</li>
+          <li>Chatbot berbasis AI dapat memberikan respons cepat</li>
+          <li>Data interaksi pengguna dapat dianalisis untuk perbaikan layanan</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-t"></span>Ancaman</div>
+        <ul class="swot-list">
+          <li>Masyarakat mudah terpapar informasi palsu (hoaks kesehatan)</li>
+          <li>Risiko kebocoran data pribadi pengguna</li>
+          <li>Pengguna cenderung mendiagnosis diri sendiri</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Innovation 2: Rekam Medis -->
+  <div id="swot-rekmed" class="swot-block">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#3b82f6;font-weight:600;margin-bottom:6px">Inovasi 02 · SDG 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px">Rekam Medis Elektronik Berbasis Cloud</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag-pill">informasi</span>
+            <span class="tag-pill">biodata</span>
+            <span class="tag-pill">cloud</span>
+          </div>
+        </div>
+        <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Target Kunci</div>
+          <div style="font-weight:700;color:#3b82f6">SDG 3.8 / 16.6</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="swot-highlight-grid">
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-s"></span>Kekuatan</div>
+        <ul class="swot-list">
+          <li>Data dapat diakses secara real-time oleh tenaga medis</li>
+          <li>Mengurangi kebutuhan akan investasi server fisik lokal</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-w"></span>Kelemahan</div>
+        <ul class="swot-list">
+          <li>Ketergantungan pada koneksi internet yang stabil</li>
+          <li>Kekhawatiran privasi dan keamanan data pasien</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-o"></span>Peluang</div>
+        <ul class="swot-list">
+          <li>Integrasi AI dan analisis data untuk prediktif kesehatan</li>
+          <li>Membangun ekosistem telemedicine yang terintegrasi</li>
+        </ul>
+      </div>
+      <div class="swot-card">
+        <div class="swot-card-title"><span class="swot-dot dot-t"></span>Ancaman</div>
+        <ul class="swot-list">
+          <li>Rentan terhadap serangan siber dan pembobolan data</li>
+          <li>Regulasi pemerintah yang cenderung berubah-ubah</li>
+          <li>Ketergantungan pada vendor cloud pihak ketiga</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full SWOT Table -->
+  <div style="margin-top:16px">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Ringkasan Tabel SWOT</div>
+    <div class="swot-table-wrap">
+      <table class="swot-table">
+        <thead>
+          <tr>
+            <th>Inovasi</th>
+            <th>Tujuan UN</th>
+            <th>Target Kunci</th>
+            <th>Kekuatan</th>
+            <th>Kelemahan</th>
+            <th>Peluang</th>
+            <th>Ancaman</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Informasi Kesehatan Digital</td>
+            <td>SDG 3 — Kesehatan & Kesejahteraan</td>
+            <td>Cakupan kesehatan universal (3.8)</td>
+            <td>
+              <ul>
+                <li class="strength">Akses luas & fleksibel</li>
+                <li class="strength">Tersedia 24/7</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Kesenjangan digital lansia</li>
+                <li>Bersifat satu arah</li>
+                <li>Minim standar medis</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li class="opportunity">Penetrasi internet tinggi</li>
+                <li class="opportunity">AI chatbot responsif</li>
+                <li class="opportunity">Analisis data pengguna</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li class="threat">Hoaks & misinformasi</li>
+                <li class="threat">Kebocoran data</li>
+                <li class="threat">Self-diagnosis berbahaya</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Rekam Medis Elektronik Cloud</td>
+            <td>SDG 3 — Kesehatan & SDG 16 — Institusi Kuat</td>
+            <td>Sistem kesehatan efisien & akuntabel</td>
+            <td>
+              <ul>
+                <li class="strength">Akses data real-time</li>
+                <li class="strength">Hemat infrastruktur fisik</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Tergantung koneksi internet</li>
+                <li>Risiko privasi pasien</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li class="opportunity">Integrasi AI prediktif</li>
+                <li class="opportunity">Ekosistem telemedicine</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li class="threat">Serangan siber</li>
+                <li class="threat">Regulasi tidak stabil</li>
+                <li class="threat">Ketergantungan vendor</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Dibuat dengan ❤️ untuk mendukung <strong>Agenda 2030</strong> Indonesia &nbsp;·&nbsp; Data bersumber dari BPS, Kemenkes, OECD, dan lembaga resmi lainnya.</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.5">SDGs Indonesia · Tujuan Pembangunan Berkelanjutan · 2024</p>
+</footer>
+
+<script>
+  const sdgs = [
+    { n:1, name:"Tanpa Kemiskinan" },
+    { n:2, name:"Tanpa Kelaparan" },
+    { n:3, name:"Kesehatan yang Baik" },
+    { n:4, name:"Pendidikan Berkualitas" },
+    { n:5, name:"Kesetaraan Gender" },
+    { n:6, name:"Air Bersih & Sanitasi" },
+    { n:7, name:"Energi Bersih" },
+    { n:8, name:"Pekerjaan Layak" },
+    { n:9, name:"Industri & Inovasi" },
+    { n:10, name:"Mengurangi Kesenjangan" },
+    { n:11, name:"Kota Berkelanjutan" },
+    { n:12, name:"Konsumsi Bertanggung Jawab" },
+    { n:13, name:"Penanganan Iklim" },
+    { n:14, name:"Ekosistem Lautan" },
+    { n:15, name:"Ekosistem Daratan" },
+    { n:16, name:"Perdamaian & Keadilan" },
+    { n:17, name:"Kemitraan Global" },
+  ];
+
+  const selected = new Set([3, 4]);
+  const grid = document.getElementById('sdgGrid');
+
+  function render() {
+    grid.innerHTML = '';
+    sdgs.forEach(s => {
+      const d = document.createElement('div');
+      d.className = `sdg-card sdg-${s.n}${selected.has(s.n) ? ' active' : ''}`;
+      d.innerHTML = `<div class="sdg-num">${s.n}</div><div class="sdg-name">${s.name}</div>`;
+      d.addEventListener('click', () => {
+        if (selected.has(s.n)) selected.delete(s.n);
+        else selected.add(s.n);
+        render();
+        updateLabel();
+      });
+      grid.appendChild(d);
+    });
+  }
+
+  function updateLabel() {
+    const names = [...selected].sort((a,b)=>a-b).map(n => {
+      const s = sdgs.find(x=>x.n===n);
+      return `SDG ${n} — ${s.name}`;
+    });
+    document.getElementById('selectedLabel').textContent = names.length ? names.join(', ') : 'Tidak ada yang dipilih';
+  }
+
+  render();
+  updateLabel();
+
+  // SWOT tab switcher
+  function showSwot(which) {
+    const tabs = document.querySelectorAll('.swot-tab');
+    const blocks = document.querySelectorAll('.swot-block');
+    tabs.forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (which === 'all') {
+      blocks.forEach(b => b.style.display = '');
+    } else if (which === 'info') {
+      document.getElementById('swot-info').style.display = '';
+      document.getElementById('swot-rekmed').style.display = 'none';
+    } else {
+      document.getElementById('swot-info').style.display = 'none';
+      document.getElementById('swot-rekmed').style.display = '';
+    }
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fact-card, .pillar, .swot-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

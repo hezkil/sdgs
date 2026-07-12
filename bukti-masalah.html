@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bukti Masalah — SDGs Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0f1e; --bg2: #101627; --surface: #151c30;
+      --border: rgba(255,255,255,0.07); --text: #e8eaf0;
+      --muted: #7a8099; --accent-blue: #3b82f6; --accent-green: #22c55e;
+      --accent-amber: #f59e0b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; line-height: 1.7; overflow-x: hidden;
+    }
+
+    /* NAV */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topnav-logo {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #e8eaf0; text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .topnav-logo span {
+      background: linear-gradient(135deg,#3b82f6,#22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .topnav-links { display: flex; align-items: center; gap: 4px; }
+    .topnav-links a {
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: #7a8099; text-decoration: none; transition: all 0.2s;
+    }
+    .topnav-links a:hover { color: #e8eaf0; background: rgba(255,255,255,0.06); }
+    .topnav-links a.active { color: #e8eaf0; background: rgba(255,255,255,0.09); }
+
+    /* PAGE */
+    .page-hero {
+      padding: 120px 24px 64px;
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px; padding: 6px 16px;
+      border-radius: 999px; display: inline-block;
+      color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.3);
+      background: rgba(245,158,11,0.08);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px,5vw,60px); font-weight: 700;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .page-title em { font-style: italic; color: var(--accent-amber); }
+    .page-desc { color: var(--muted); font-size: 16px; max-width: 580px; margin: 0 auto; }
+
+    .divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* INTERVIEW META */
+    .meta-bar {
+      max-width: 900px; margin: 48px auto 0; padding: 0 24px;
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .meta-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 18px; font-size: 13px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .meta-chip .label { color: var(--muted); font-size: 11px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:2px; }
+    .meta-chip .val { font-weight: 600; color: var(--text); font-size: 13px; }
+
+    /* TRANSCRIPT */
+    .transcript-wrap {
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-blue); font-weight: 600; margin-bottom: 16px;
+    }
+    .transcript-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .transcript-header {
+      padding: 20px 28px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .transcript-header-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(245,158,11,0.15); display: flex; align-items: center;
+      justify-content: center; font-size: 18px;
+    }
+    .transcript-header-text { font-weight: 600; font-size: 15px; }
+    .transcript-header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .qa-list { padding: 8px 0; }
+    .qa-item {
+      padding: 20px 28px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start;
+    }
+    .qa-item:last-child { border-bottom: none; }
+    .qa-role {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .role-p { background: rgba(59,130,246,0.2); color: #93c5fd; }
+    .role-n { background: rgba(34,197,94,0.2); color: #86efac; }
+    .qa-text { font-size: 15px; line-height: 1.7; color: var(--text); }
+    .qa-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 500; letter-spacing:0.06em; text-transform:uppercase; }
+
+    /* ADDITIONAL INFO */
+    .info-box {
+      background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 14px; padding: 28px; margin: 0 28px 28px;
+    }
+    .info-box-title {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent-amber); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .info-box p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .info-box p + p { margin-top: 10px; }
+    .highlight-text { color: var(--text); font-weight: 500; }
+
+    /* INSIGHT CARDS */
+    .insight-grid {
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .insight-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .insight-card:hover { border-color: rgba(255,255,255,0.15); }
+    .insight-card-icon { font-size: 24px; margin-bottom: 12px; }
+    .insight-card-title { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+    .insight-card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* PHOTOS */
+    .photos-wrap {
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+    }
+    .photo-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;
+    }
+    .photo-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .photo-card img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      object-position: left center; display: block;
+    }
+    .photo-card-r img { object-position: right center; }
+    .photo-caption {
+      padding: 14px 18px;
+      font-size: 12px; color: var(--muted); text-align: center; font-weight: 500;
+    }
+
+    /* PROCESS FLOW */
+    .flow-wrap {
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+    }
+    .flow-row {
+      display: flex; gap: 0; align-items: stretch; flex-wrap: wrap;
+    }
+    .flow-step {
+      flex: 1; min-width: 140px;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 20px 16px; text-align: center; position: relative;
+    }
+    .flow-step:first-child { border-radius: 12px 0 0 12px; }
+    .flow-step:last-child { border-radius: 0 12px 12px 0; }
+    .flow-step + .flow-step { border-left: none; }
+    .flow-step.problem { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25); }
+    .flow-step-num { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .flow-step-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .flow-step-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .flow-arrow {
+      display: flex; align-items: center; padding: 0 4px; color: var(--muted); font-size: 18px;
+      flex-shrink: 0; align-self: center;
+    }
+    .problem-badge {
+      display: inline-block; background: rgba(239,68,68,0.15); color: #f87171;
+      border: 1px solid rgba(239,68,68,0.3); border-radius: 6px;
+      padding: 2px 8px; font-size: 10px; font-weight: 700; margin-top: 6px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 24px;
+      text-align: center; color: var(--muted); font-size: 13px; margin-top: 64px;
+    }
+    footer strong { color: var(--text); }
+
+    @media(max-width:768px){
+      .insight-grid { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .flow-row { flex-direction: column; }
+      .flow-step:first-child { border-radius: 12px 12px 0 0; }
+      .flow-step:last-child { border-radius: 0 0 12px 12px; }
+      .flow-step + .flow-step { border-left: 1px solid var(--border); border-top: none; }
+      .flow-arrow { display: none; }
+      .topnav { padding: 0 16px; }
+      .topnav-links a { padding: 6px 10px; font-size: 12px; }
+    }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .fadeup { animation: fadeUp 0.6s ease forwards; }
+    .d1{animation-delay:0.1s;opacity:0} .d2{animation-delay:0.2s;opacity:0} .d3{animation-delay:0.3s;opacity:0}
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="topnav-logo" href="index.html">🌍 <span>SDGs</span> Indonesia</a>
+  <div class="topnav-links">
+    <a href="index.html">Beranda</a>
+    <a href="bukti-masalah.html" class="active">Bukti Masalah</a>
+    <a href="metrik-empati.html">Metrik Empati</a>
+    <a href="mindmap.html">Mindmap</a>
+    <a href="lean-canvas.html">Lean Canvas</a>
+    <a href="video.html">Video</a>
+    <a href="refleksi.html">Refleksi</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="eyebrow fadeup">Riset Lapangan · SDG 3</div>
+  <h1 class="page-title fadeup d1">Bukti <em>Masalah</em> di Lapangan</h1>
+  <p class="page-desc fadeup d2">Dokumentasi wawancara dan observasi langsung di RS Bhayangkara Polri Kramat Jati yang mengungkap hambatan nyata dalam digitalisasi layanan kesehatan.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- META CHIPS -->
+<div class="meta-bar">
+  <div class="meta-chip">
+    <div><div class="label">Tanggal</div><div class="val">22 April 2026</div></div>
+  </div>
+  <div class="meta-chip">
+    <div><div class="label">Tempat</div><div class="val">RS Bhayangkara Polri Kramat Jati</div></div>
+  </div>
+  <div class="meta-chip">
+    <div><div class="label">Pewawancara</div><div class="val">Yehezkiel Tornagogo Lumbantoruan</div></div>
+  </div>
+  <div class="meta-chip">
+    <div><div class="label">Metode</div><div class="val">Wawancara & Observasi Langsung</div></div>
+  </div>
+</div>
+
+<!-- PHOTOS -->
+<div class="photos-wrap" style="margin-top:40px">
+  <div class="section-label">Dokumentasi Visual</div>
+  <div class="photo-grid">
+    <div class="photo-card">
+      <img src="bukti-foto.png" alt="Pendaftaran Online - Bukti konfirmasi reservasi pasien" style="object-position:left center">
+      <div class="photo-caption">📱 Gambar 1 — Pendaftaran Online<br/>Bukti konfirmasi reservasi pasien atas nama Yehezkiel T. Lumbantoruan</div>
+    </div>
+    <div class="photo-card photo-card-r">
+      <img src="bukti-foto.png" alt="Pendaftaran Offline - Mesin antrean di loket RS" style="object-position:right center">
+      <div class="photo-caption">🖥️ Gambar 2 — Pendaftaran Offline<br/>Mesin antrian dan loket konvensional di RS Bhayangkara Polri</div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSCRIPT -->
+<div class="transcript-wrap">
+  <div class="section-label">Transkrip Wawancara</div>
+  <div class="transcript-box">
+    <div class="transcript-header">
+      <div class="transcript-header-icon">🎙️</div>
+      <div>
+        <div class="transcript-header-text">Wawancara dengan Petugas Administrasi</div>
+        <div class="transcript-header-sub">RS Bhayangkara Polri · 22 April 2026 · P = Pewawancara, N = Narasumber</div>
+      </div>
+    </div>
+    <div class="qa-list">
+      <div class="qa-item">
+        <div class="qa-role role-p">P</div>
+        <div>
+          <div class="qa-label">Pewawancara</div>
+          <div class="qa-text">Apa bentuk digitalisasi yang diterapkan pada rumah sakit ini?</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-n">N</div>
+        <div>
+          <div class="qa-label">Narasumber (Petugas Administrasi)</div>
+          <div class="qa-text">Disini kami menggunakan <span style="color:var(--accent-green);font-weight:500">reservasi online</span> untuk perawatan ke dokter dengan tanggal yang diinginkan, lalu juga ada riwayat dan data pasien yang disimpan secara online.</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-p">P</div>
+        <div>
+          <div class="qa-label">Pewawancara</div>
+          <div class="qa-text">Apa yang membedakan reservasi online dan offline?</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-n">N</div>
+        <div>
+          <div class="qa-label">Narasumber</div>
+          <div class="qa-text">Bagi yang dapat reservasi online dapat menggunakan web, sementara bagi yang tidak dapat melakukannya akan menggunakan fasilitas offline. Sehingga terdapat <span style="color:var(--accent-green);font-weight:500">antrian yang terbagi</span> agar antrian tidak menumpuk di satu sisi.</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-p">P</div>
+        <div>
+          <div class="qa-label">Pewawancara</div>
+          <div class="qa-text">Keuntungan apa yang didapatkan jika reservasi secara online?</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-n">N</div>
+        <div>
+          <div class="qa-label">Narasumber</div>
+          <div class="qa-text">Sebenarnya jika mendaftar online <span style="color:var(--accent-amber);font-weight:500">tetap harus mengantri ke loket</span>, tetapi biasanya proses jadi lebih cepat sebab data dan rujukan sudah didaftarkan sebelumnya.</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-p">P</div>
+        <div>
+          <div class="qa-label">Pewawancara</div>
+          <div class="qa-text">Apa rumah sakit ini menekankan untuk 100% online?</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-n">N</div>
+        <div>
+          <div class="qa-label">Narasumber</div>
+          <div class="qa-text">Saya tidak tahu pasti, tetapi biasanya kami menyediakan reservasi online bagi yang paham mendaftar secara online dan untuk yang keperluan mendadak.</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-p">P</div>
+        <div>
+          <div class="qa-label">Pewawancara</div>
+          <div class="qa-text">Jadi reservasi online dan offline akan berdampingan untuk memfasilitasi administrasi rumah sakit?</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-role role-n">N</div>
+        <div>
+          <div class="qa-label">Narasumber</div>
+          <div class="qa-text" style="color:var(--accent-green);font-weight:500">Benar.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional info box -->
+    <div class="info-box">
+      <div class="info-box-title">⚠️ Temuan Lapangan Tambahan</div>
+      <p>Setelah wawancara, pewawancara kembali menanyakan: <span class="highlight-text">"Mengapa walau sudah mendaftar online, saya harus tetap mengantri?"</span> — Admin menjawab bahwa tetap harus mengantri di antrian umum untuk <span class="highlight-text">verifikasi sidik jari</span>.</p>
+      <p>Pada RS Bhayangkara Polri Kramat Jati, meski sudah daftar online, pasien harus: (1) antri verifikasi sidik jari di antrian umum, (2) baru kemudian antri di poliklinik untuk konsultasi dokter. Ini berarti <span class="highlight-text">dua kali antrian</span> untuk satu kunjungan.</p>
+      <p>Menurut analisis pewawancara, lebih ideal jika pasien yang sudah daftar online langsung antri di poliklinik saja. Poliklinik pun memiliki rata-rata <span class="highlight-text">4–6 petugas</span> yang kompeten untuk dialih-tugaskan menangani verifikasi, sehingga alur bisa lebih efisien.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOW DIAGRAM -->
+<div class="flow-wrap">
+  <div class="section-label">Alur Masalah Saat Ini</div>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Pasien yang mendaftar online tetap melewati proses 2 tahap antrian — padahal berpotensi diringkas menjadi 1 tahap.</p>
+  <div class="flow-row">
+    <div class="flow-step">
+      <div class="flow-step-num">01</div>
+      <div class="flow-step-title">Daftar Online</div>
+      <div class="flow-step-desc">Pasien mendaftar via web/aplikasi sebelum hari kunjungan</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step problem">
+      <div class="flow-step-num">02</div>
+      <div class="flow-step-title">Antrian Umum</div>
+      <div class="flow-step-desc">Verifikasi sidik jari di loket — wajib meski sudah daftar online</div>
+      <div class="problem-badge">Bottleneck</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step problem">
+      <div class="flow-step-num">03</div>
+      <div class="flow-step-title">Antrian Poliklinik</div>
+      <div class="flow-step-desc">Antri lagi di poliklinik untuk ditanya keluhan sebelum ke dokter</div>
+      <div class="problem-badge">Duplikasi</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-step-num">04</div>
+      <div class="flow-step-title">Konsultasi Dokter</div>
+      <div class="flow-step-desc">Pasien akhirnya bertemu dokter setelah melewati 2 antrian</div>
+    </div>
+  </div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="insight-grid" style="margin-top:16px">
+  <div class="insight-card">
+    <div class="insight-card-icon">🔁</div>
+    <div class="insight-card-title">Duplikasi Proses Antrian</div>
+    <div class="insight-card-body">Pendaftaran online tidak mengeliminasi kebutuhan antri di loket fisik karena masih ada wajib verifikasi sidik jari di antrian umum terlebih dahulu.</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-card-icon">📶</div>
+    <div class="insight-card-title">Digitalisasi Setengah Jalan</div>
+    <div class="insight-card-body">Sistem online berdampingan dengan offline, namun belum terintegrasi penuh sehingga manfaat efisiensi waktu belum optimal dirasakan pasien.</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-card-icon">👥</div>
+    <div class="insight-card-title">Potensi Realokasi Petugas</div>
+    <div class="insight-card-body">Dengan rata-rata 4–6 petugas di poliklinik, verifikasi dapat dialih-tugaskan sehingga antrian umum bisa dihilangkan bagi pendaftar online.</div>
+  </div>
+  <div class="insight-card">
+    <div class="insight-card-icon">💡</div>
+    <div class="insight-card-title">Peluang Prototype Antrian</div>
+    <div class="insight-card-body">Temuan ini melahirkan gagasan pembuatan prototipe website antrian terintegrasi yang menggabungkan verifikasi digital dan manajemen antrian poliklinik.</div>
+  </div>
+</div>
+
+<footer>
+  <p>Riset Lapangan · <strong>RS Bhayangkara Polri Kramat Jati</strong> · 22 April 2026</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.5">SDGs Indonesia · Bukti Masalah · Digitalisasi Kesehatan</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+      }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.insight-card,.meta-chip,.flow-step,.photo-card').forEach(el=>{
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
